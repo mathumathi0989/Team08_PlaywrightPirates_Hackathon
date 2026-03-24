@@ -1,4 +1,0 @@
-background - userlogged in - authentication
-user is on patient page
-user click on edit
-user should see the edit patient page

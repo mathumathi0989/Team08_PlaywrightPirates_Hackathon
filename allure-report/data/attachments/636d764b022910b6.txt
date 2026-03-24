@@ -1,4 +1,0 @@
-Background - Second - Patient page - authenticated
-user in edit page
-user clears existing value
-user shoudl see placeholder
