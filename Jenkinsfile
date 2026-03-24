@@ -16,8 +16,8 @@ pipeline{
 
     environment{
         APP_URL = credentials('APP_URL')
-        USERNAME = credentials('TEST_USERNAME')
-        PASSWORD = credentials('TEST_PASSWORD')
+        APP_USERNAME = credentials('APP_USERNAME')
+        APP_PASSWORD = credentials('APP_PASSWORD')
     }
 
     stages{
@@ -33,6 +33,9 @@ pipeline{
                 sh """
                 BROWSER=${params.BROWSER}\
                 HEADLESS=${params.HEADLESS}\
+                APP_URL=${APP_URL}\
+                APP_USERNAME=${APP_USERNAME}\
+                APP_PASSWORD=${APP_PASSWORD}\
                 npm run test:bdd
                 """
             }
@@ -53,7 +56,9 @@ pipeline{
     }
     post{
         always{
-            archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
+            archiveArtifacts artifacts: 'playwright-report/**', 
+            allowEmptyArchive: true,
+            fingerprint: true
         }
         success{
             echo 'Test passed!'
