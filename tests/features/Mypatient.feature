@@ -120,7 +120,7 @@ Feature: My Patient
     And First page arrow (<<) should be disabled
     And Next arrow (>) should be enabled
     And Last page arrow (>>) should be enabled
-    
+
     When User navigates to the last page of patient record
     Then Previous arrow (>) should be disabled
     And First page arrow (>>) should be disabled
