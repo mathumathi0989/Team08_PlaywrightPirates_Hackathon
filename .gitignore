@@ -10,4 +10,5 @@ node_modules/
 /playwright/.auth/
 .features-gen/
 allure-results/
+allure-report/
 logs/
