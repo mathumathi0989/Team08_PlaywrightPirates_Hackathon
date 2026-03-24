@@ -1,4 +1,7 @@
-import { Given, When, Then, expect } from "../../fixtures/testFixtures.js";
+import { createBdd } from "playwright-bdd";
+import {test} from '../fixtures/testFixtures.js';
+import {expect} from '@playwright/test';
+const {Given,When,Then} = createBdd(test);
 
 Given("User logged into Application",async({page, logger})=>{
 logger.info("=====Test Start Here for Add Patient======")
