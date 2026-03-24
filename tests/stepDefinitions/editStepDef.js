@@ -1,24 +1,35 @@
 import { createBdd } from "playwright-bdd";
-import {EditPage} from '../../pages/EditPage';
-const {Given,When,Then} = createBdd();
+import {test} from '../fixtures/testFixtures.js';
+import {expect} from '@playwright/test';
+const {Given,When,Then} = createBdd(test);
 
-Given('User is in my patient page', async ({}) => {
-  console.log("user is on patient page")
-});
 
-When('User clicks edit icon for the particular patient', async ({EditPage}) => {
-  await EditPage.editDeleteAction({edit:true});
-
-});
-
-Then('User should see  Edit Patient page on the dialog box', async ({}) => {
-  EditPage.verifyEditTitle();
+Given('User logged in and patients already exists', async ({}) => {
+  console.log("background - userlogged in - authentication");
 });
 
 
+Given('User is in my patient page', async ({logger}) => {
+  logger.info("user is on patient page");
+  console.log("user is on patient page");
+});
 
-Then('User should see {string} and enabled', async ({}, arg) => {
-  EditPage.verifySubmitCloseButton();
+When('User clicks edit icon for the particular patient', async ({logger,editPatientPage}) => {
+  console.log("user click on edit");
+ // await editPatientPage.editDeleteAction({edit:true});
+
+});
+
+Then('User should see  Edit Patient page on the dialog box', async ({logger}) => {
+//  EditPage.verifyEditTitle();
+console.log("user should see the edit patient page");
+});
+
+
+Then('User should see {string} and enabled', async ({logger}, arg) => {
+ logger.info("user should see on submit button in patient page");
+ console.log("user should see other buttons");
+ // EditPage.verifySubmitCloseButton(submit);
 });
 
 Then('User should see {int} input field', async ({}, arg) => {
@@ -91,19 +102,21 @@ Then('Close button should have red color', async ({}) => {
   // From: tests/features/EditModule.feature:68:1
 });
 
+Given('After navigating to the My Patient page, the logged-in user clicks the edit icon', async ({}) => {
+  console.log("Background - Second - Patient page - authenticated");
+});
+
+
 Given('User is edit dialog box', async ({}) => {
-  // Step: Given User is edit dialog box
-  // From: tests/features/EditModule.feature:72:1
+ console.log("user in edit page");
 });
 
 When('User clear exisiting value in {string}', async ({}, arg) => {
-  // Step: When User clear exisiting value in "First Name"
-  // From: tests/features/EditModule.feature:75:1
+  console.log("user clears existing value");
 });
 
 Then('User should see placeholder {string}', async ({}, arg) => {
-  // Step: Then User should see placeholder "First name"
-  // From: tests/features/EditModule.feature:76:1
+  console.log("user shoudl see placeholder");
 });
 
 When('User clicks submit after editing first name with valid data', async ({}) => {

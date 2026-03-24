@@ -1,6 +1,6 @@
 import {ReusableMethods} from '../utilities/ReusableMethods.js';
 
-export class EditModule{
+export class EditPatientPage{
 
     constructor(page){
         this.page = page;
