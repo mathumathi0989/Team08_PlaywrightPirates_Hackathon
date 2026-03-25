@@ -34,16 +34,14 @@ pipeline{
 
         stage('Run Tests'){
             steps{
-                withEnv(['PATH+EXTRA=/opt/homebrew/bin:/usr/local/bin']) 
+                withEnv(['PATH+EXTRA=/opt/homebrew/bin:/usr/local/bin',
+                "BROWSER=${params.BROWSER}",
+                "HEADLESS=${params.HEADLESS}"
+                ]) 
                 {
-                sh """
-                BROWSER=${params.BROWSER}\
-                HEADLESS=${params.HEADLESS}\
-                APP_URL=${APP_URL}\
-                APP_USERNAME=${APP_USERNAME}\
-                APP_PASSWORD=${APP_PASSWORD}\
+                sh '''
                 npm run test:bdd
-                """
+                '''
             }
         }
         }
