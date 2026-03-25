@@ -6,6 +6,8 @@ import { LoginPage } from "../../pages/LoginPage.js";
 import { AddPatientPage } from "../../pages/AddPatientPage.js";
 import { EditPatientPage } from "../../pages/EditPatientPage.js";
 import { DeletePatientPage } from "../../pages/DeletePatientPage.js";
+import { ViewPatientTestReportsPage } from '../../pages/ViewPatientTestReportsPage.js';
+
 // import { ViewTestReportPage } from "../../pages/ViewTestReportPage.js";
 import { logger } from "../../utilities/logger.js";
 
