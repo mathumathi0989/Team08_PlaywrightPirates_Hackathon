@@ -12,6 +12,11 @@ pipeline{
             defaultValue: true,
             description: 'Run headless?'
         )
+        string(
+        name: 'MODULE',
+        defaultValue: '',
+        description: 'Enter module name or tag (e.g. Edit Patient or @editPatient)'
+         )
     }
 
     environment{
@@ -36,11 +41,19 @@ pipeline{
             steps{
                 withEnv(['PATH+EXTRA=/opt/homebrew/bin:/usr/local/bin',
                 "BROWSER=${params.BROWSER}",
-                "HEADLESS=${params.HEADLESS}"
+                "HEADLESS=${params.HEADLESS}",
+                "MODULE=${params.MODULE.trim()}"
                 ]) 
                 {
                 sh '''
+                if [ -z "$MODULE" ]; then
+                echo "Running full suite"
                 npm run test:bdd
+                 else
+                echo "Running module: $MODULE"
+                npx bddgen
+                npx playwright test --grep "$MODULE"
+                fi
                 '''
             }
         }

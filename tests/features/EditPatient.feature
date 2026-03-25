@@ -1,3 +1,4 @@
+@editPatient
 Feature: Edit Patient  - Dialog Box vaildation
 
 Rule: Edit Patient  - Dialog Box vaildation
