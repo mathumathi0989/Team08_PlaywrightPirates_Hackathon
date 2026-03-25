@@ -17,14 +17,14 @@ Examples:
 | submit |
 | close |
 
-# Scenario: Presence of 9 Input field
-# Then User should see 9 input field
+Scenario: Presence of 9 Input field
+Then User should see 9 input field
 
-# Scenario: Presence of 3 drop down
-# Then User should see 3 drop down
+Scenario: Presence of 3 drop down
+Then User should see 3 drop down
 
-# Scenario: Presence of file upload option
-# Then User should see exactly 1 file upload option
+Scenario: Presence of file upload option
+Then User should see exactly 1 file upload option
 
 # Scenario Outline: Validate the Presence of fields in the edit patient
 # Then User should see the "<field>" populated with the value entered during patient
