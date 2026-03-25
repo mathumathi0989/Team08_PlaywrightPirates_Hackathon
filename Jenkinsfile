@@ -51,12 +51,7 @@ pipeline{
                 npm run test:bdd
                  else
                 echo "Running module: $MODULE"
-                # remove @ if tag is passed
-                MODULE_NAME=$(echo $MODULE | sed 's/@//')
-                # generate only required feature
-                 npx bddgen --features="tests/features/*$MODULE_NAME*.feature" --ignore-missing-steps
-
-                  # run only matching tests
+                npx bddgen --ignore-missing-steps
                 npx playwright test --grep "$MODULE"
                 fi
                 '''
