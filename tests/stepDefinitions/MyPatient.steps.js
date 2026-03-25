@@ -30,7 +30,7 @@ Then(`Search icon should be displayed inside the search bar`, async() => {
     await expect(this.page.locator()).toBeVisible();
 });
 
-Then(`Placeholder text {string} should be displayed`, (arg0: string) => {
+Then(`Placeholder text {string} should be displayed`, async() => {
     await expect(this.page.locator()).toBeVisible();
 });
 
@@ -52,7 +52,7 @@ Then(`Patient name should be displayed for each patient record`, async() => {
   expect(count).toBeGreaterThan(0);
 });
 
-Then(`Details column should display {string}, email", {string} for each patient record`, (arg0: string, arg1: string) => {
+Then(`Details column should display {string}, email", {string} for each patient record`, async() => {
     // [Then] Describes the expected outcome or result of the scenario.
 });
 
@@ -70,7 +70,7 @@ Then(`Phone number displayed in details column should contain valid digits for e
   expect(text).toMatch(/\d{10}/);
 });
 
-Then(`Date of birth should be displayed in {string} format for each patient record`, async(arg0: string) => {
+Then(`Date of birth should be displayed in {string} format for each patient record`, async() => {
     const text = await myPatientPage.tableRows.first().textContent();
   expect(text).toMatch(/\d{2}-\d{2}-\d{4}/);
 });
@@ -94,7 +94,7 @@ Then(`Delete icon should be displayed for each patient record`, async() => {
 
 Then(`My Patients page should display with empty table`, async() => {
     const count = await myPatientPage.getPatientCount();
-  expect(count).toBe(0);.
+  expect(count).toBe(0);
 });
 
 When(`User clicks an sorting arrow in Patient Id column`, async() => {
@@ -182,25 +182,27 @@ When(`User clicks any page navigation arrow`, async() => {
 });
 
 Then('Pagination text should display the correct range and total number of patients',
-async() => () {
+async() => {
+
+
   const text = await myPatientPage.getPaginationText();
   const isValid = PaginationUtil.validatePagination(text);
 
   expect(isValid).toBeTruthy();
 });
 
-Then('"Showing 0 to 0 of 0 patients" should be displayed', async() => () {
+Then('"Showing 0 to 0 of 0 patients" should be displayed', async() =>  {
   const text = await myPatientPage.getPaginationText();
   expect(text).toContain('0 to 0 of 0');
 });
 
-Then('First, previous, next, last arrows should be disabled', async() => () {
+Then('First, previous, next, last arrows should be disabled', async() => {
   const buttons = this.page.locator('button[disabled]');
   expect(await buttons.count()).toBeGreaterThan(0);
 });
 
 Then('All pagination arrows (First, Previous, Next, Last) should be disabled',
-async() => () {
+async() =>  {
   const buttons = this.page.locator('button[disabled]');
   expect(await buttons.count()).toBeGreaterThan(0);
 });
