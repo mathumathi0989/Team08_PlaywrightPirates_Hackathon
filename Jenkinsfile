@@ -23,13 +23,19 @@ pipeline{
     stages{
         stage('Install Dependencies'){
             steps{
+            withEnv(['PATH+EXTRA=/usr/local/bin:/opt/homebrew/bin']) {
+                sh 'node --version'
+                sh 'npm --version'
                 sh 'npm ci'
                 sh 'npx playwright install --with-deps'
             }
         }
+        }
 
         stage('Run Tests'){
             steps{
+                withEnv(['PATH+EXTRA=/usr/local/bin:/opt/homebrew/bin']) 
+                {
                 sh """
                 BROWSER=${params.BROWSER}\
                 HEADLESS=${params.HEADLESS}\
@@ -40,13 +46,14 @@ pipeline{
                 """
             }
         }
+        }
 
         stage('Publish Report'){
             steps{
                 publishHTML(target:[
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
-                    KeepAll: true,
+                    keepAll: true,
                     reportDir: 'playwright-report',
                     reportFiles: 'index.html',
                     reportName: 'Playwright Report'
