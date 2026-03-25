@@ -51,7 +51,7 @@ pipeline{
                 npm run test:bdd
                  else
                 echo "Running module: $MODULE"
-                npx bddgen --ignore-missing-steps
+                npx bddgen
                 npx playwright test --grep "$MODULE"
                 fi
                 '''
