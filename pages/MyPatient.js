@@ -47,4 +47,4 @@ class MyPatientPage {
 
 }
 
-module.exports = { MyPatientPage };
+export default { MyPatientPage };
