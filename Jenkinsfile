@@ -23,7 +23,7 @@ pipeline{
     stages{
         stage('Install Dependencies'){
             steps{
-            withEnv(['PATH+EXTRA=/usr/local/bin:/opt/homebrew/bin']) {
+            withEnv(['PATH+EXTRA=/opt/homebrew/bin:/usr/local/bin']) {
                 sh 'node --version'
                 sh 'npm --version'
                 sh 'npm ci'
@@ -34,7 +34,7 @@ pipeline{
 
         stage('Run Tests'){
             steps{
-                withEnv(['PATH+EXTRA=/usr/local/bin:/opt/homebrew/bin']) 
+                withEnv(['PATH+EXTRA=/opt/homebrew/bin:/usr/local/bin']) 
                 {
                 sh """
                 BROWSER=${params.BROWSER}\
