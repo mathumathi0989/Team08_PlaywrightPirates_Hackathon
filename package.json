@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "npx bddgen && npx playwright test",
+    "test:bdd": "npm run test",
     "test:addpatient": "npx bddgen && npx playwright test AddPatient",
     "allure:generate": "allure generate allure-results --clean -o allure-report",
     "allure:open": "allure open allure-report",

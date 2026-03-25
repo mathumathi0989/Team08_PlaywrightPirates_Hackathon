@@ -76,7 +76,7 @@ export default defineConfig({
       testMatch: [
         '**/.features-gen/**/EditPatient.feature.spec.js',
         '**/.features-gen/**/DeletePatient.feature.spec.js',],
-      dependencies: [`setup - ${BROWSER}`],
+   //   dependencies: [`setup - ${BROWSER}`],
     },
 
   

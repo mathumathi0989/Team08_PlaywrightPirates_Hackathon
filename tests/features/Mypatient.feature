@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 Feature: My Patient
 
   Background:
@@ -143,4 +141,3 @@ Feature: My Patient
   Scenario: Pagination behavior with limited or no data
     Then All pagination arrows (First, Previous, Next, Last) should be disabled
     And If no patient data exists, the text "Showing 0 to 0 of 0 patients" should be displayed
->>>>>>> e4f05ef (added my petient feature file)
