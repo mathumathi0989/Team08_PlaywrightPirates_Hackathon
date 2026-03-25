@@ -14,13 +14,14 @@ Given('User is in my patient page', async ({logger}) => {
   console.log("user is on patient page");
 });
 
-When('User clicks edit icon for the particular patient', async ({logger,editPatientPage}) => {
+When('User clicks edit icon for the particular patient', async ({editPatientPage}) => {
   console.log("user click on edit");
+  
   await editPatientPage.editDeleteAction({edit:true});
 
 });
 
-Then('User should see  Edit Patient page on the dialog box', async ({logger,editPatientPage}) => {
+Then('User should see  Edit Patient page on the dialog box', async ({editPatientPage}) => {
   editPatientPage.verifyEditTitle();
 console.log("user should see the edit patient page");
 });
