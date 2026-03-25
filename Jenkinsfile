@@ -51,7 +51,8 @@ pipeline{
                 npm run test:bdd
                  else
                 echo "Running module: $MODULE"
-                 npx playwright test --grep "$MODULE"
+                npm run bdd
+                npx playwright test --grep "$MODULE"
                 fi
                 '''
             }
