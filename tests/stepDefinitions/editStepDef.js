@@ -14,42 +14,40 @@ Given('User is in my patient page', async ({logger}) => {
   console.log("user is on patient page");
 });
 
-When('User clicks edit icon for the particular patient', async ({logger,editPatientPage}) => {
+When('User clicks edit icon for the particular patient', async ({editPatientPage}) => {
   console.log("user click on edit");
- // await editPatientPage.editDeleteAction({edit:true});
+  
+  await editPatientPage.editDeleteAction({edit:true});
 
 });
 
-Then('User should see  Edit Patient page on the dialog box', async ({logger}) => {
-//  EditPage.verifyEditTitle();
+Then('User should see  Edit Patient page on the dialog box', async ({editPatientPage}) => {
+  editPatientPage.verifyEditTitle();
 console.log("user should see the edit patient page");
 });
 
 
-Then('User should see {string} and enabled', async ({logger}, arg) => {
+Then('User should see {string} and enabled', async ({logger,editPatientPage}, buttonName) => {
  logger.info("user should see on submit button in patient page");
  console.log("user should see other buttons");
- // EditPage.verifySubmitCloseButton(submit);
+  editPatientPage.verifySubmitCloseButton(buttonName);
 });
 
-Then('User should see {int} input field', async ({}, arg) => {
+Then('User should see {int} input field', async ({editPatientPage}, count) =>{
+  await expect(editPatientPage.inputFields).toHaveCount(count);
+
+});
+
+Then('User should see {int} drop down', async ({editPatientPage}, count) => {
+  await expect(editPatientPage.dropdownFields).toHaveCount(count);
+});
+
+Then('User should see exactly {int} file upload option', async ({editPatientPage}, count) => {
+await expect(editPatientPage.fileUpload).toHaveCount(count);
+});
+
+Then('User should see the {string} populated with the value entered during patient', async ({editPatientPage}, arg) => {
   
-
-});
-
-Then('User should see {int} drop down', async ({}, arg) => {
-  // Step: Then User should see 3 drop down
-  // From: tests/features/EditModule.feature:22:1
-});
-
-Then('User should see exactly {int} file upload option', async ({}, arg) => {
-  // Step: Then User should see exactly 1 file upload option
-  // From: tests/features/EditModule.feature:25:1
-});
-
-Then('User should see the {string} populated with the value entered during patient', async ({}, arg) => {
-  // Step: Then User should see the "First Name" populated with the value entered during patient
-  // From: tests/features/EditModule.feature:28:1
 });
 
 Then('User should see vitals title after DOB field', async ({}) => {

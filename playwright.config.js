@@ -77,7 +77,7 @@ export default defineConfig({
 
         "**/.features-gen/**/*.feature.spec.js",
       ],
-      dependencies: [`setup - ${BROWSER}`],
+      //dependencies: [`setup - ${BROWSER}`],
     },
   ],
 });

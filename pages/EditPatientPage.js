@@ -6,11 +6,15 @@ export class EditPatientPage{
         this.page = page;
         this.helper = new ReusableMethods(page);
 
-        this.editButton = page.locator();
-        this.editTitle = page.locator();
-        this.editFirstName = page.locator();
-        this.editSubmitButton = page.locator();
-        this.editCloseButton = page.locator();
+        this.editButton = this.page.locator();
+        this.editTitle = this.page.locator();
+        this.editFirstName = this.page.locator();
+        this.editSubmitButton = this.page.locator();
+        this.editCloseButton = this.page.locator();
+        this.inputFields = this.page.locator('input');
+        this.dropdownFields = this.page.locator('select');
+        this.fileUpload = this.page.locator('input[type="file"]');
+        //this.firstName = 
     }
 
     async editDeleteAction({edit, deleteAction} = {}){
@@ -37,5 +41,16 @@ export class EditPatientPage{
             await this.helper.assertEnabled(this.editCloseButton);
         }
     }
+
+  
+
+
+
+
+
+
+
+
+
 
 }

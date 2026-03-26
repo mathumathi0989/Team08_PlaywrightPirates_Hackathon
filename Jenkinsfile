@@ -12,30 +12,51 @@ pipeline{
             defaultValue: true,
             description: 'Run headless?'
         )
+        string(
+        name: 'MODULE',
+        defaultValue: '',
+        description: 'Enter module name or tag (e.g. Edit Patient or @editPatient)'
+         )
     }
 
     environment{
         APP_URL = credentials('APP_URL')
-        USERNAME = credentials('TEST_USERNAME')
-        PASSWORD = credentials('TEST_PASSWORD')
+        APP_USERNAME = credentials('APP_USERNAME')
+        APP_PASSWORD = credentials('APP_PASSWORD')
     }
 
     stages{
         stage('Install Dependencies'){
             steps{
+            withEnv(['PATH+EXTRA=/opt/homebrew/bin:/usr/local/bin']) {
+                sh 'node --version'
+                sh 'npm --version'
                 sh 'npm ci'
                 sh 'npx playwright install --with-deps'
             }
         }
+        }
 
         stage('Run Tests'){
             steps{
-                sh """
-                BROWSER=${params.BROWSER}\
-                HEADLESS=${params.HEADLESS}\
+                withEnv(['PATH+EXTRA=/opt/homebrew/bin:/usr/local/bin',
+                "BROWSER=${params.BROWSER}",
+                "HEADLESS=${params.HEADLESS}",
+                "MODULE=${params.MODULE.trim()}"
+                ]) 
+                {
+                sh '''
+                if [ -z "$MODULE" ]; then
+                echo "Running full suite"
                 npm run test:bdd
-                """
+                 else
+                echo "Running module: $MODULE"
+                npx bddgen
+                npx playwright test --grep "$MODULE"
+                fi
+                '''
             }
+        }
         }
 
         stage('Publish Report'){
@@ -43,7 +64,7 @@ pipeline{
                 publishHTML(target:[
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
-                    KeepAll: true,
+                    keepAll: true,
                     reportDir: 'playwright-report',
                     reportFiles: 'index.html',
                     reportName: 'Playwright Report'
@@ -53,7 +74,9 @@ pipeline{
     }
     post{
         always{
-            archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
+            archiveArtifacts artifacts: 'playwright-report/**', 
+            allowEmptyArchive: true,
+            fingerprint: true
         }
         success{
             echo 'Test passed!'

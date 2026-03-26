@@ -6,7 +6,7 @@ setup("Creating the storageState", async ({page}) => {
     //login
     console.log("Storage state step -- url opened and logged in ");
     
-    //await loginPage.login(process.env.APP_USERNAME, process.env.APP_PASSWORD);
+   // await loginPage.login(process.env.APP_USERNAME, process.env.APP_PASSWORD);
     await page.waitForTimeout(5000);
 
     //save the storageState

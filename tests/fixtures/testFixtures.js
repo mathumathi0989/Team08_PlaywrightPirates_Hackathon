@@ -6,8 +6,12 @@ import { LoginPage } from "../../pages/LoginPage.js";
 import { AddPatientPage } from "../../pages/AddPatientPage.js";
 import { EditPatientPage } from "../../pages/EditPatientPage.js";
 import { DeletePatientPage } from "../../pages/DeletePatientPage.js";
+// import { ViewPatientTestReportsPage } from '../../pages/ViewPatientTestReportsPage.js';
+
 // import { ViewTestReportPage } from "../../pages/ViewTestReportPage.js";
 import { logger } from "../../utilities/logger.js";
+import {TestDataHelper} from "../,,/utilities/TestDataHelper.js";
+
 
 export const test = base.extend({
     loginPage: async ({ page }, use) => {
@@ -41,9 +45,13 @@ export const test = base.extend({
   //   await use(new ViewTestReportPage(page));
   // },
 
-  logger: async ({}, use) => {
-    await use(logger);
+  logger: async ({page}, use) => {
+    await use(new logger(page));
   },
+
+  testDataHelper: async({page}, use) => {
+    await use(new TestDataHelper(page));
+  }
 });
 // All step files must import Given/When/Then from HERE — never from playwright-bdd directly
 
