@@ -1,8 +1,8 @@
 import { test as base } from "playwright-bdd";
 
 import { LoginPage } from "../../pages/LoginPage.js";
-// import { DashboardPage } from "../../pages/DashboardPage.js";
-// import { MyPatientPage } from "../../pages/MyPatientPage.js";
+import { DashboardPage } from "../../pages/DashboardPage.js";
+import { MyPatientPage } from "../../pages/MyPatientPage.js";
 import { AddPatientPage } from "../../pages/AddPatientPage.js";
 import { EditPatientPage } from "../../pages/EditPatientPage.js";
 import { DeletePatientPage } from "../../pages/DeletePatientPage.js";
@@ -18,13 +18,13 @@ export const test = base.extend({
     await use(new LoginPage(page));
   },
 
-  //   dashboardPage: async ({ page }, use) => {
-  //     await use(new DashboardPage(page));
-  //   },
+  dashboardPage: async ({ page }, use) => {
+    await use(new DashboardPage(page));
+  },
 
-  //   myPatientPage: async ({ page }, use) => {
-  //     await use(new MyPatientPage(page));
-  //   },
+  myPatientPage: async ({ page }, use) => {
+    await use(new MyPatientPage(page));
+  },
 
   addPatientPage: async ({ page }, use) => {
     await use(new AddPatientPage(page));
@@ -52,10 +52,3 @@ export const test = base.extend({
     await use(new TestDataHelper(page));
   },
 });
-// All step files must import Given/When/Then from HERE — never from playwright-bdd directly
-
-// const { Given, When, Then } = createBdd(test);
-
-// export { Given, When, Then };
-
-// export { expect } from "@playwright/test";

@@ -181,8 +181,15 @@
 // Then('Pagination text should display the correct range and total number of patients',
 // async() => {
 
-//   const text = await myPatientPage.getPaginationText();
-//   const isValid = PaginationUtil.validatePagination(text);
+import {expect} from '@playwright/test';
+import { createBdd } from "playwright-bdd";
+import {test} from '../fixtures/testFixtures.js';
+const {Given,When,Then} = createBdd(test);
+// import { Given, When, Then, DataTable } from '@badeball/cypress-cucumber-preprocessor';
+// const { Given, When, Then } = require('@cucumber/cucumber');
+// const { expect } = require('@playwright/test');
+// const { MyPatientPage } = require('../pages/MyPatient');
+// const { PaginationUtil } = require('../utils/paginationUtil');
 
 //   expect(isValid).toBeTruthy();
 // });
@@ -192,10 +199,20 @@
 //   expect(text).toContain('0 to 0 of 0');
 // });
 
-// Then('First, previous, next, last arrows should be disabled', async() => {
-//   const buttons = this.page.locator('button[disabled]');
-//   expect(await buttons.count()).toBeGreaterThan(0);
-// });
+let myPatientPage;
+Given(`User is in dietician application dashboard page`, async(page) => {
+await page.got(url);    
+});
+
+When(`User clicks on My Patients button`, async(myPatientPage) => {
+ // myPatientPage = new MyPatientPage(this.page);
+  await myPatientPage.goto();
+});
+// My Patient Header validation
+
+Then(`Page header {string} should be displayed`, async() => {
+    await expect(this.page.locator()).toBeVisible();
+});
 
 // Then('All pagination arrows (First, Previous, Next, Last) should be disabled',
 // async() =>  {

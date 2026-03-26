@@ -1,4 +1,4 @@
-class MyPatientPage {
+export class MyPatientPage {
   constructor(page) {
     this.page = page;
     this.url = "/readpatients";
