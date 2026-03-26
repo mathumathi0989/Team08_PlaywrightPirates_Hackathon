@@ -1,9 +1,13 @@
 
-import { Given, When, Then, DataTable } from '@badeball/cypress-cucumber-preprocessor';
-const { Given, When, Then } = require('@cucumber/cucumber');
-const { expect } = require('@playwright/test');
-const { MyPatientPage } = require('../pages/MyPatient');
-const { PaginationUtil } = require('../utils/paginationUtil');
+import {expect} from '@playwright/test';
+import { createBdd } from "playwright-bdd";
+import {test} from '../fixtures/testFixtures.js';
+const {Given,When,Then} = createBdd(test);
+// import { Given, When, Then, DataTable } from '@badeball/cypress-cucumber-preprocessor';
+// const { Given, When, Then } = require('@cucumber/cucumber');
+// const { expect } = require('@playwright/test');
+// const { MyPatientPage } = require('../pages/MyPatient');
+// const { PaginationUtil } = require('../utils/paginationUtil');
 
 
 let myPatientPage;
@@ -11,8 +15,8 @@ Given(`User is in dietician application dashboard page`, async(page) => {
 await page.got(url);    
 });
 
-When(`User clicks on My Patients button`, async() => {
-   myPatientPage = new MyPatientPage(this.page);
+When(`User clicks on My Patients button`, async(myPatientPage) => {
+ // myPatientPage = new MyPatientPage(this.page);
   await myPatientPage.goto();
 });
 // My Patient Header validation
