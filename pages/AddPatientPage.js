@@ -63,17 +63,36 @@ export class AddPatientPage {
     logger.info("Add Patient modal is open");
   }
 
-  getDropdownOption(optionText) {
-  return this.modal.locator(".multiselect__element", { hasText: optionText });
+  inputFieldMap() {
+    return {
+      "First Name": this.fNameInput,
+      "Last Name": this.lNameInput,
+      Email: this.emailInput,
+      "Contact Number": this.contactNumInput,
+      Weight: this.weightInput,
+      Height: this.heightInput,
+      Temperature: this.temperatureInput,
+      SP: this.spInput,
+      DP: this.dpInput,
+    };
   }
 
+  getDropdown(dropdownName) {
+    const mapping = {
+      Allergy: this.allergiesDD,
+      "Food Preference": this.foodPreferenceDD,
+      "Cuisine Category": this.cuisineCategoryDD,
+    };
+    const dropdown = mapping[dropdownName];
+    if (!dropdown) {
+      throw new Error(`Unknown dropdown: ${dropdownName}`);
+    }
+    return dropdown;
+  }
 
-
-
-  // async getAllInputFields() {
-  //   return this.modal.locator
-  //   ("input:not([type='file']):not([type='date']), input[type='text'], input[type='email'], input[type='number']");
-  // }
+  getDropdownOption(optionText) {
+    return this.modal.locator(".multiselect__element", { hasText: optionText });
+  }
 
   // async getAllDropdowns() {
   //   return this.modal.locator("select, [role='combobox'], [class*='dropdown']");

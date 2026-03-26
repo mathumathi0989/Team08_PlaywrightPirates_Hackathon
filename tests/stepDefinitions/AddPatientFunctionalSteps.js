@@ -20,7 +20,7 @@ When("User clicks on Allergy dropdown", async ({ addPatientPage, logger }) => {
 
 Then(
   "Allergy dropdown should contain all expected values",
-  async ({ paaddPatientPagege, logger }) => {
+  async ({ addPatientPage, logger }) => {
     logger.info("Verifying all allergy dropdown values");
     for (const value of dropdownValues.allergy) {
       await expect(addPatientPage.getDropdownOption(value)).toBeVisible();
@@ -131,21 +131,119 @@ Then(
     logger.info("Verifying Submit button is enabled");
     await expect(addPatientPage.submitButton).toBeEnabled();
     //await addPatientPage.helper.assertEnabled(addPatientPage.submitButton);
-  }
-);
-
-When(
-  "User clicks Submit button",
-  async ({ addPatientPage, logger }) => {
-    logger.info("Clicking Submit button");
-    await addPatientPage.helper.click(addPatientPage.submitButton);
   },
 );
+
+When("User clicks Submit button", async ({ addPatientPage, logger }) => {
+  logger.info("Clicking Submit button");
+  await addPatientPage.helper.click(addPatientPage.submitButton);
+});
 Then(
   'User should see "Patient successfully created" toast message',
   async ({ page, addPatientPage, logger }) => {
     logger.info("Verifying success toast message");
-    await addPatientPage.helper.assertVisible(page.getByText("Patient successfully created", { exact: true }));
+    await addPatientPage.helper.assertVisible(
+      page.getByText("Patient successfully created", { exact: true }),
+    );
   },
 );
 
+Then(
+  "User should be directed to My Patient Page with New Patient Details created",
+  async () => {
+    await myPatientPage.waitForPageLoad(); // wait for My Patient Page to load
+    const isPatientCreated = await myPatientPage.isNewPatientDisplayed(); // check patient details
+    expect(isPatientCreated).toBe(true);
+  },
+);
+
+When(
+  "the user selects {string} from the {string} dropdown",
+  async ({ addPatientPage }, optionValue, dropdownName) => {
+    const dropdown = addPatientPage.getDropdown(dropdownName);
+
+    await dropdown.click(); // open dropdown
+    await addPatientPage.getDropdownOption(optionValue).click(); // select option
+  },
+);
+
+Then(
+  "{string} should be selected in the {string} field",
+  async ({ addPatientPage }, expected, dropdownName) => {
+    const dropdown = addPatientPage.getDropdown(dropdownName);
+
+    await expect(dropdown).toContainText(expected);
+  },
+);
+
+Then(
+  "{string} should not be selected in the {string} field",
+  async ({ addPatientPage }, notExpected, dropdownName) => {
+    const dropdown = addPatientPage.getDropdown(dropdownName);
+
+    await expect(dropdown).not.toContainText(notExpected);
+  },
+);
+
+When(
+  "User clicks on Date of Birth field",
+  async ({ addPatientPage, logger }) => {
+    logger.info("Clicking DOB field");
+    await addPatientPage.dobField.click();
+  },
+);
+Then(
+  "User should see calendar date picker with Month Day Year",
+  async ({ page, logger }) => {
+    logger.info("Verifying calendar is visible");
+    await expect(
+      page.locator(".calendar, .datepicker, [role='dialog']"),
+    ).toBeVisible();
+  },
+);
+
+When(
+  "User selects valid date {string} in DOB field",
+  async ({ addPatientPage, logger }, date) => {
+    logger.info(`Selecting valid date: ${date}`);
+    await addPatientPage.dobField.fill(date);
+    await addPatientPage.dobField.press("Tab");
+  },
+);
+Then(
+  "User should see selected date {string} in MM\\/DD\\/YYYY format",
+  async ({ addPatientPage, logger }, date) => {
+    logger.info(`Verifying date format: ${date}`);
+    await expect(addPatientPage.dobField).toHaveValue(date);
+  },
+);
+
+// what for the dates when clicked in the datepicker??
+
+When(
+  "User enters {string} in DOB field and tabs away",
+  async ({ addPatientPage, logger }, date) => {
+    logger.info(`Entering invalid DOB: ${date}`);
+    await addPatientPage.dobField.fill(date);
+    await addPatientPage.dobField.press("Tab");
+  },
+);
+
+When("User selects current date as DOB", async ({ addPatientPage, logger }) => {
+  const today = new Date();
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const dd = String(today.getDate()).padStart(2, "0");
+  const yyyy = today.getFullYear();
+  const currentDate = `${mm}/${dd}/${yyyy}`;
+  logger.info(`Selecting current date: ${currentDate}`);
+  await addPatientPage.dobField.fill(currentDate);
+  await addPatientPage.dobField.press("Tab");
+});
+
+Then(
+  "User should see DOB error message {string}",
+  async ({ page, logger }, errorMessage) => {
+    logger.info(`Verifying DOB error: ${errorMessage}`);
+    await expect(page.getByText(errorMessage)).toBeVisible();
+  },
+);

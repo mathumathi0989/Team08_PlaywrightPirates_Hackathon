@@ -1,15 +1,15 @@
 class MyPatientPage {
   constructor(page) {
     this.page = page;
-    this.url = '/readpatients';
+    this.url = "/readpatients";
 
-    this.pageTitle = page.locator('text=My Patients');
+    this.pageTitle = page.locator("text=My Patients");
     this.searchBox = page.locator('input[placeholder="Search"]');
-    this.patientTable = page.locator('table');
-    this.tableRows = page.locator('table tbody tr');
-    this.viewTestReportsBtn = page.locator('text=View Previous Test Reports');
-   // this.viewDietPlansBtn = page.locator('text=View Previous Diet Plans'); // out of scope
-  //  this.createReportBtn = page.locator('text=Create New Report/Plan'); // out of scope
+    this.patientTable = page.locator("table");
+    this.tableRows = page.locator("table tbody tr");
+    this.viewTestReportsBtn = page.locator("text=View Previous Test Reports");
+    // this.viewDietPlansBtn = page.locator('text=View Previous Diet Plans'); // out of scope
+    //  this.createReportBtn = page.locator('text=Create New Report/Plan'); // out of scope
     this.editButton = page.locator('button:has-text("Edit"), .edit-icon');
     this.deleteButton = page.locator('button:has-text("Delete"), .delete-icon');
   }
@@ -25,7 +25,7 @@ class MyPatientPage {
     await this.searchBox.fill();
   }
 
- async clickViewReports(index = 0) {
+  async clickViewReports(index = 0) {
     await this.viewTestReportsBtn.nth(index).click();
   }
 
@@ -37,14 +37,22 @@ class MyPatientPage {
     await this.deleteButton.nth(index).click();
   }
 
-// out of scope
-// async clickDietPlan(index = 0) {
-//     await this.viewDietPlansBtn.nth(index).click();
-//   }
-//   async clickNewReports(index = 0) {
-//     await this.createReportBtn.nth(index).click();
-//   }
+  // out of scope
+  // async clickDietPlan(index = 0) {
+  //     await this.viewDietPlansBtn.nth(index).click();
+  //   }
+  //   async clickNewReports(index = 0) {
+  //     await this.createReportBtn.nth(index).click();
+  //   }
 
+  //--By Degi
+
+  async waitForPageLoad() {
+    await this.page.waitForSelector("#newPatientDetails"); // selector for new patient section
+  }
+  async isNewPatientDisplayed() {
+    return await this.page.isVisible("#newPatientDetails");
+  }
 }
 
 export default { MyPatientPage };

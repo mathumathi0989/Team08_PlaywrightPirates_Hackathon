@@ -11,10 +11,11 @@ const logger = winston.createLogger({
     winston.format.splat(),
     winston.format.json(),
   ),
-//  defaultMeta: { service: "dietician-playwright-framework" },
+  //  defaultMeta: { service: "dietician-playwright-framework" },
   transports: [
     new winston.transports.File({ filename: "logs/combined.log" }),
-     new winston.transports.Console({          // ← add this
+    new winston.transports.Console({
+      // ← for logs in console
       format: winston.format.combine(
         winston.format.colorize(),
         winston.format.printf(({ timestamp, level, message }) => {
@@ -24,6 +25,5 @@ const logger = winston.createLogger({
     }),
   ],
 });
-
 
 export { logger };
