@@ -1,111 +1,115 @@
 // Generated from: tests/features/AddPatientValidation.feature
-import { test } from "../../../fixtures/testFixtures.js";
+import { test } from "../../../tests/fixtures/testFixtures.js";
 
 test.describe('Add Patient Dialog Box - Validation', () => {
 
-  test.beforeEach('Background', async ({ Given, When }, testInfo) => { if (testInfo.error) return;
-    await Given('User logged into Application'); 
-    await When('User clicks on New Patient'); 
+  test.beforeEach('Background', async ({ Given, When, addPatientPage, logger }, testInfo) => { if (testInfo.error) return;
+    await Given('User logged into Application', null, { logger }); 
+    await When('User clicks on New Patient', null, { addPatientPage, logger }); 
   });
   
-  test('Validate title of the dialog box', async ({ Then }) => { 
-    await Then('User should see Add Patient Details on the dialog box'); 
+  test('Validate title of the dialog box', async ({ Then, addPatientPage, logger }) => { 
+    await Then('User should see Add Patient Details on the dialog box', null, { addPatientPage, logger }); 
   });
 
-  test('Validate presence of 9 input fields', async ({ Then }) => { 
-    await Then('User should see 9 input boxes in the Add Patient Details dialog box'); 
+  test('Validate presence of 9 input fields', async ({ Then, addPatientPage }) => { 
+    await Then('User should see 9 input boxes in the Add Patient Details dialog box', null, { addPatientPage }); 
   });
 
-  test('Validate presence of 3 dropdowns', async ({ Then }) => { 
-    await Then('User should see 3 dropdowns in the Add Patient Details dialog box'); 
+  test('Validate presence of 3 dropdowns', async ({ Then, addPatientPage }) => { 
+    await Then('User should see 3 dropdowns in the Add Patient Details dialog box', null, { addPatientPage }); 
   });
 
-  test('Validate presence of a Date Picker field', async ({ Then }) => { 
-    await Then('User should see a date picker for DOB field with MM/DD/YYYY displayed'); 
+  test('Validate presence of a Date Picker field', async ({ Then, addPatientPage }) => { 
+    await Then('User should see a date picker for DOB field with MM/DD/YYYY displayed', null, { addPatientPage }); 
   });
 
-  test('Validate Presence of file Upload option', async ({ Then }) => { 
-    await Then('User should see exactly 1 file upload option in Add Patient Details dialog box'); 
+  test('Validate Presence of file Upload option', async ({ Then, addPatientPage }) => { 
+    await Then('User should see exactly 1 file upload option in Add Patient Details dialog box', null, { addPatientPage }); 
   });
 
-  test('Validate Presence of Submit button', async ({ Then }) => { 
-    await Then('User should see one Submit button'); 
+  test('Validate Presence of Submit button', async ({ Then, addPatientPage }) => { 
+    await Then('User should see one Submit button', null, { addPatientPage }); 
   });
 
-  test('Validate State of Submit button', async ({ Then }) => { 
-    await Then('User should see one Submit button in disabled state'); 
+  test('Validate State of Submit button', async ({ Then, addPatientPage }) => { 
+    await Then('User should see one Submit button in disabled state', null, { addPatientPage }); 
   });
 
-  test('Validate Presence of Close button', async ({ Then }) => { 
-    await Then('User should see one Close button'); 
+  test('Validate Presence of Close button', async ({ Then, addPatientPage }) => { 
+    await Then('User should see one Close button', null, { addPatientPage }); 
   });
 
-  test('Validate State of Close button', async ({ Then }) => { 
-    await Then('User should see one Close button in enabled state'); 
+  test('Validate State of Close button', async ({ Then, addPatientPage }) => { 
+    await Then('User should see one Close button in enabled state', null, { addPatientPage }); 
   });
 
-  test('Validate Placeholder for first field - firstname', async ({ Then }) => { 
-    await Then('User should see mandatory field with placeholder "First name"'); 
+  test('Validate Placeholder for first field - firstname', async ({ Then, addPatientPage }) => { 
+    await Then('User should see mandatory field with placeholder "First name"', null, { addPatientPage }); 
   });
 
-  test('Validate Placeholder for second field - lastname', async ({ Then }) => { 
-    await Then('User should see mandatory field with placeholder "Last name"'); 
+  test('Validate Placeholder for second field - lastname', async ({ Then, addPatientPage }) => { 
+    await Then('User should see mandatory field with placeholder "Last name"', null, { addPatientPage }); 
   });
 
-  test('Validate Placeholder for thrid field - Email', async ({ Then }) => { 
-    await Then('User should see mandatory field with placeholder "Email"'); 
+  test('Validate Placeholder for thrid field - Email', async ({ Then, addPatientPage }) => { 
+    await Then('User should see mandatory field with placeholder "Email"', null, { addPatientPage }); 
   });
 
-  test('Validate Placeholder for second field - Contact Num', async ({ Then }) => { 
-    await Then('User should see mandatory field with placeholder "Contact Number"'); 
+  test('Validate Placeholder for second field - Contact Num', async ({ Then, addPatientPage }) => { 
+    await Then('User should see mandatory field with placeholder "Contact Number"', null, { addPatientPage }); 
   });
 
-  test('Validate Placeholder for dropdown -Allergies', async ({ Then }) => { 
-    await Then('User should see mandatory dropdown with placeholder "Allergies"'); 
+  test('Validate Placeholder for dropdown -Allergies', async ({ Then, addPatientPage }) => { 
+    await Then('User should see mandatory dropdown with placeholder "Allergies"', null, { addPatientPage }); 
   });
 
-  test('Validate Placeholder for dropdown -Food Preference', async ({ Then }) => { 
-    await Then('User should see mandatory dropdown with placeholder "Food Preference"'); 
+  test('Validate Placeholder for dropdown -Food Preference', async ({ Then, addPatientPage }) => { 
+    await Then('User should see mandatory dropdown with placeholder "Food Preference"', null, { addPatientPage }); 
   });
 
-  test('Validate Placeholder for dropdown -Cusine Category', async ({ Then }) => { 
-    await Then('User should see mandatory dropdown with placeholder "Cusine Category"'); 
+  test('Validate Placeholder for dropdown -Cusine Category', async ({ Then, addPatientPage }) => { 
+    await Then('User should see mandatory dropdown with placeholder "Cusine Category"', null, { addPatientPage }); 
   });
 
-  test('Validate Placeholder for DOB field', async ({ Then }) => { 
-    await Then('User should see mandatory DOB with placeholder "Date of Birth"'); 
+  test('Validate Placeholder for DOB field', async ({ Then, addPatientPage }) => { 
+    await Then('User should see mandatory DOB with placeholder "Date of Birth"', null, { addPatientPage }); 
   });
 
-  test('Validate Placeholder for Vitals section -Weight', async ({ Then }) => { 
-    await Then('User should see non-manadatory field placeholder with "Weight"'); 
+  test('Validate Placeholder for Vitals section -Weight', async ({ Then, addPatientPage }) => { 
+    await Then('User should see non-manadatory field placeholder with "Weight"', null, { addPatientPage }); 
   });
 
-  test('Validate Placeholder for Vitals section -Height', async ({ Then }) => { 
-    await Then('User should see non-manadatory field placeholder with "Height"'); 
+  test('Validate Placeholder for Vitals section -Height', async ({ Then, addPatientPage }) => { 
+    await Then('User should see non-manadatory field placeholder with "Height"', null, { addPatientPage }); 
   });
 
-  test('Validate Placeholder for Vitals section -Temperature', async ({ Then }) => { 
-    await Then('User should see non-manadatory field placeholder with "Temperature"'); 
+  test('Validate Placeholder for Vitals section -Temperature', async ({ Then, addPatientPage }) => { 
+    await Then('User should see non-manadatory field placeholder with "Temperature"', null, { addPatientPage }); 
   });
 
-  test('Validate Placeholder for Vitals section -SP', async ({ Then }) => { 
-    await Then('User should see non-manadatory field placeholder with "SP"'); 
+  test('Validate Placeholder for Vitals section -SP', async ({ Then, addPatientPage }) => { 
+    await Then('User should see non-manadatory field placeholder with "SP"', null, { addPatientPage }); 
   });
 
-  test('Validate Placeholder for Vitals section -DP', async ({ Then }) => { 
-    await Then('User should see non-manadatory field placeholder with "DP"'); 
+  test('Validate Placeholder for Vitals section -DP', async ({ Then, addPatientPage }) => { 
+    await Then('User should see non-manadatory field placeholder with "DP"', null, { addPatientPage }); 
   });
 
-  test('Validate Presence of Upload Health Report', async ({ Then }) => { 
-    await Then('User should see text Upload Health Report'); 
+  test('Validate Presence of Upload Health Report', async ({ Then, addPatientPage }) => { 
+    await Then('User should see text Upload Health Report', null, { addPatientPage }); 
   });
 
-  test('Validate Presence of No file Chosen when no files uploaded', async ({ Then }) => { 
-    await Then('User should see text No file Chosen'); 
+  test('Validate Presence of No file Chosen when no files uploaded', async ({ Then, addPatientPage }) => { 
+    await Then('User should see text No file Chosen', null, { addPatientPage }); 
   });
 
-  test('Validate Presence of scroll bar on the dialog box', async ({ Then }) => { 
-    await Then('User should see a scroll bar at the right side of dialog box'); 
+  test('Validate Presence of Chosen files button', async ({ Then, addPatientPage }) => { 
+    await Then('User should see the Choose Files button', null, { addPatientPage }); 
+  });
+
+  test('Validate Presence of scroll bar on the dialog box', async ({ Then, addPatientPage }) => { 
+    await Then('User should see a scroll bar at the right side of dialog box', null, { addPatientPage }); 
   });
 
 });
@@ -143,5 +147,6 @@ const bddFileData = [ // bdd-data-start
   {"pwTestLine":95,"pickleLine":70,"tags":[],"steps":[{"pwStepLine":7,"gherkinStepLine":4,"keywordType":"Context","textWithKeyword":"Given User logged into Application","isBg":true,"stepMatchArguments":[]},{"pwStepLine":8,"gherkinStepLine":5,"keywordType":"Action","textWithKeyword":"When User clicks on New Patient","isBg":true,"stepMatchArguments":[]},{"pwStepLine":96,"gherkinStepLine":71,"keywordType":"Outcome","textWithKeyword":"Then User should see non-manadatory field placeholder with \"DP\"","stepMatchArguments":[{"group":{"start":54,"value":"\"DP\"","children":[{"start":55,"value":"DP","children":[{"children":[]}]},{"children":[{"children":[]}]}]},"parameterTypeName":"string"}]}]},
   {"pwTestLine":99,"pickleLine":73,"tags":[],"steps":[{"pwStepLine":7,"gherkinStepLine":4,"keywordType":"Context","textWithKeyword":"Given User logged into Application","isBg":true,"stepMatchArguments":[]},{"pwStepLine":8,"gherkinStepLine":5,"keywordType":"Action","textWithKeyword":"When User clicks on New Patient","isBg":true,"stepMatchArguments":[]},{"pwStepLine":100,"gherkinStepLine":74,"keywordType":"Outcome","textWithKeyword":"Then User should see text Upload Health Report","stepMatchArguments":[]}]},
   {"pwTestLine":103,"pickleLine":76,"tags":[],"steps":[{"pwStepLine":7,"gherkinStepLine":4,"keywordType":"Context","textWithKeyword":"Given User logged into Application","isBg":true,"stepMatchArguments":[]},{"pwStepLine":8,"gherkinStepLine":5,"keywordType":"Action","textWithKeyword":"When User clicks on New Patient","isBg":true,"stepMatchArguments":[]},{"pwStepLine":104,"gherkinStepLine":77,"keywordType":"Outcome","textWithKeyword":"Then User should see text No file Chosen","stepMatchArguments":[]}]},
-  {"pwTestLine":107,"pickleLine":79,"tags":[],"steps":[{"pwStepLine":7,"gherkinStepLine":4,"keywordType":"Context","textWithKeyword":"Given User logged into Application","isBg":true,"stepMatchArguments":[]},{"pwStepLine":8,"gherkinStepLine":5,"keywordType":"Action","textWithKeyword":"When User clicks on New Patient","isBg":true,"stepMatchArguments":[]},{"pwStepLine":108,"gherkinStepLine":80,"keywordType":"Outcome","textWithKeyword":"Then User should see a scroll bar at the right side of dialog box","stepMatchArguments":[]}]},
+  {"pwTestLine":107,"pickleLine":79,"tags":[],"steps":[{"pwStepLine":7,"gherkinStepLine":4,"keywordType":"Context","textWithKeyword":"Given User logged into Application","isBg":true,"stepMatchArguments":[]},{"pwStepLine":8,"gherkinStepLine":5,"keywordType":"Action","textWithKeyword":"When User clicks on New Patient","isBg":true,"stepMatchArguments":[]},{"pwStepLine":108,"gherkinStepLine":80,"keywordType":"Outcome","textWithKeyword":"Then User should see the Choose Files button","stepMatchArguments":[]}]},
+  {"pwTestLine":111,"pickleLine":82,"tags":[],"steps":[{"pwStepLine":7,"gherkinStepLine":4,"keywordType":"Context","textWithKeyword":"Given User logged into Application","isBg":true,"stepMatchArguments":[]},{"pwStepLine":8,"gherkinStepLine":5,"keywordType":"Action","textWithKeyword":"When User clicks on New Patient","isBg":true,"stepMatchArguments":[]},{"pwStepLine":112,"gherkinStepLine":83,"keywordType":"Outcome","textWithKeyword":"Then User should see a scroll bar at the right side of dialog box","stepMatchArguments":[]}]},
 ]; // bdd-data-end
