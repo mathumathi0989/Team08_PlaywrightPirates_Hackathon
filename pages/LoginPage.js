@@ -28,7 +28,7 @@ export class LoginPage {
     this.errorMessage = page.locator('.error, .alert, .alert-danger, [role="alert"], .invalid-feedback').first();
   }
 
-  async openApp(url = 'https://your-app-url.com/login') {
+  async openApp(url = 'http://localhost:4200/login') {
     await this.page.goto(url);
   }
 
