@@ -55,13 +55,110 @@ Given After navigating to the My Patient page, the logged-in user clicks the edi
 And User is edit dialog box
 
 
-# Scenario: Edit first name with valid data
-# When User clicks submit after editing first name with valid data
-# Then User should redirected to my patient with edited value in first name
+Scenario Outline: Edit name field with valid data
+When User clicks submit after editing "<field>" with valid data
+Then User should redirected to my patient with edited value in "<field>"
+Examples:
+|field|
+|First Name|
+|Last Name |
 
-# Scenario: Edit first name with numeric data
-# When User clicks submit after editing first name with numeric data
-# Then User should  see error message in Patient name accepts only alphabets
+Scenario Outline: Edit name field with invalid data
+When User clicks submit after editing field with "<testcase>" data
+Then User should see error message "Patient name accepst only alphabets"
+|testcase|
+|invalid_FirstName_Numeric|
+|invalid_FirstName_SpecialChar |
+|invalid_LastName_Numeric|
+|invalid_LastName_SpecialChar |
+
+Scenario: Edit email with valid data
+When User clicks submit after editing the email with valid data
+Then User should see the updated email value in My patient page
+
+Scenario Outline: Edit email with invalid data
+When User clicks submit after editing the email with invalid "<testcase>"
+Then User should see "<error_message>"
+| testcase | error_message |
+|invalidEmail_invalidFormat | Please enter a valid email address | 
+|invalidEmail_missing@Symbol | Please enter a valid email address |
+
+
+Scenario Outline: Verify edit vitals field with valid value
+When user clicks submit after entering a valid value in the "<vital>" field
+Then user should see the updated "<vital>" value in the My patient page
+Examples:
+|vital|
+|Weight|
+|Height|
+|Temperature|
+
+
+Scenario Outline: Edit vitals field with invalid data
+When user clicks submit after entering "<testcase>" in the vital field
+Then user should see the "<error_message>"
+Examples:
+|testcase|error_message|
+|invalidVitals_WeightAlpha|Please enter a valid weight|
+|invalidVitals_WeightSpecialChar| Please enter a valid weight|
+|invalidVitals_HeightAlpha| Please enter a valid height |
+|invalidVitals_HeightSpecialChar| Please enter a valid height |
+|invalidVitals_TempAlpha|Please enter a valid temperature|
+|invalidVitals_TempSpecialChar| Please enter a valid temperature|
+
+
+Scenario: Edit only SP with valid value
+When user clicks submit after eidting the valid value in SP field only
+Then user should receive an error message in DP field
+
+Scenario: Edit only DP with valid value
+When user clicks submit after eidting the valid value in DP field only
+Then user should receive an error message in SP field
+
+Scenario: Edit both SP and DP with valid values
+When user clicks submit after entering valid values in both SP and DP fields
+Then user should be redirected to My patient page
+
+
+Scenario Outline: Edit blood pressure fields with invalid data
+When user clicks submit after entering invalid "<testcase>" in the SP and DP fields
+Then user should see the "<error_message>"
+Examples:
+|testcase|error_message|
+|invalidSP_Alpha| Please enter a valid SP value |
+|invalidSP_SpecialChar | Please enter a valid SP value |
+| invalidDP_Alpha | Please enter a valid DP value |
+| invalidDP_SpecialChar | Please enter a valid DP value |
+
+
+Scenario: Calendar date picker is displayed for DOB field
+When user clicks the Date of Birth field
+Then user should see a calendar date picker with month day and year
+
+Scenario Outline: Invalid date input in DOB field
+When user click submit after entering invalid "<testcase>" in the DOB field
+Then user should see the "<error_message"
+Examples:
+|testcase| error_message |
+| cinvalidDOB_CurrentDate | Invalid date, Please select valid date |
+| invalidDOB_Alpha | Invalid date format |
+| invalidDOB_Incomplete | Invalid date format |
+
+Scenario: verify upload functionality
+When user clicks submit after user upload a valid file
+Then Uploaded file should be saved successfully
+
+Scenario Outline: Close the edit dialog
+Given user is in the edit dialog box "<state>"
+When user clicks the close button
+Then edit dialog should close 
+Examples:
+|state |
+| without unsaved changes |
+| with unsaved changes |
+
+
+
 
 
 

@@ -1,9 +1,9 @@
-import { defineConfig, devices, firefox, webkit } from "@playwright/test";
+import { defineConfig, devices } from "@playwright/test";
 import { defineBddConfig } from "playwright-bdd";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-
+import process from 'process';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -19,9 +19,9 @@ const testDir = defineBddConfig({
 
 const browserDevices = {
   chromium: devices["Desktop Chrome"],
-  // firefox: devices["Desktop Firefox"],
-  // webkit: devices["Desktop Safari"],
-  // edge: devices["Desktop Edge"],
+  firefox: devices["Desktop Firefox"],
+  webkit: devices["Desktop Safari"],
+  edge: devices["Desktop Edge"],
 };
 
 const selectedDevice = browserDevices[BROWSER] || devices["Desktop Chrome"];
@@ -72,11 +72,11 @@ export default defineConfig({
         storageState: "auth/storageState.json",
       },
       testMatch: [
-        // '**/.features-gen/**/EditPatient.feature.spec.js',
-        // '**/.features-gen/**/DeletePatient.feature.spec.js',],
-
-        "**/.features-gen/**/*.feature.spec.js",
-      ],
+        '**/.features-gen/**/EditPatient.feature.spec.js',
+        '**/.features-gen/**/DeletePatient.feature.spec.js',],
+         
+        // "**/.features-gen/**/*.feature.spec.js",
+      // ],
       //dependencies: [`setup - ${BROWSER}`],
     },
   ],

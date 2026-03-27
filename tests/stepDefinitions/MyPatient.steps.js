@@ -11,8 +11,8 @@ const {Given,When,Then} = createBdd(test);
 
 
 let myPatientPage;
-Given(`User is in dietician application dashboard page`, async(page) => {
-await page.got(url);    
+Given(`User is in dietician application dashboard page`, async({page}) => {
+await page.goto(url);    
 });
 
 When(`User clicks on My Patients button`, async(myPatientPage) => {

@@ -14,6 +14,7 @@ export class ReusableMethods {
   async fill(locator, value) {
     const element = this.page.locator(locator);
     await element.waitFor({ state: "visible" });
+    await element.clear();
     await element.fill(value);
   }
 
@@ -22,14 +23,19 @@ export class ReusableMethods {
   }
 
   async assertVisible(locator) {
-    await expect(this.page.locator(locator).toBeVisible());
+   expect(this.page.locator(locator).toBeVisible());
   }
 
   async assertText(locator, expectedText) {
-    await expect(this.page.locator(locator)).toHaveText(expectedText);
+   expect(this.page.locator(locator)).toHaveText(expectedText);
   }
 
   async assertEnabled(locator) {
-    await expect(this.page.locator(locator).toBeEnabled());
+   expect(this.page.locator(locator).toBeEnabled());
   }
+
+  async assertNotVisible(locator){
+    expect(this.page.locator(locator).not.toBeVisible());
+  }
+
 }

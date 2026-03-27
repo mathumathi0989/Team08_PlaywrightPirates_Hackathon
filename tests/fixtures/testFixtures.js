@@ -45,8 +45,8 @@ export const test = base.extend({
   //   await use(new ViewTestReportPage(page));
   // },
 
-  logger: async ({page}, use) => {
-    await use(new logger(page));
+  logger: async ({}, use) => {
+    await use(logger);
   },
 
   testDataHelper: async({page}, use) => {

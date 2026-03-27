@@ -31,7 +31,8 @@ export class EditPatientPage{
         this.tempartureField = this.page.locator();
         this.uploadLabel = this.page.locator();
         this.noFileChosenText = this.page.locator();
-
+        this.calendarIcon = this.page.locator();
+        this.errorMessage = this.page.locator();
 
        
     }
@@ -74,6 +75,16 @@ export class EditPatientPage{
         };
     }
 
+    #vitalMap(){
+        return {
+            'Weight': this.weightField,
+            'Height': this.heightField,
+            'Temperature': this.tempartureField,
+            'SP': this.spField,
+            'DP': this.dpField,
+        };
+    }
+
     async verifyFieldPopulated(fieldName){
         const locator = this.#fieldMap()[fieldName];
         await this.helper.assertVisible(locator);
@@ -100,7 +111,62 @@ export class EditPatientPage{
         await this.helper.assertVisible(this.noFileChosenText);
      }
 
+     async editFieldAndSubmit(fieldName, value){
+        const locator = this.#fieldMap()[fieldName]?? this.#vitalMap()[fieldName];
+        await this.helper.fill(locator,value);
+        await this.helper.click(this.editSubmitButton);
+     }
 
+     async verifyFieldUpdatedOnPatientPage(fieldName){
+     const tableCell = this.page.locator(`[data-testid="patient-${fieldName.toLowerCase().replace(/ /g, '-')}"]`);
+     await this.helper.assertVisible(tableCell);
+     }
+
+     async verifyVitalUpdated(vitalName){
+        const cell = this.page.locator(`[data-testid="patient-${vitalName.toLowerCase()}"]`);
+     await this.helper.assertVisible(cell);
+     }
+
+     async clickDobField(){
+    await this.helper.click(this.dobField);
+     }
+
+     async uploadFile(filePath){
+        await this.fileUpload.setInputFiles(filePath);
+     }
+
+     async verifyFileUploadSuccess(){
+     const successIndicator = this.page.locator('');
+     await this.helper.assertVisible(successIndicator);
+     }
+
+     async makeUnsavedChange(fieldName, value){
+       const locator = this.#fieldMap()[fieldName]??this.#vitalMap()[fieldName];
+        await this.helper.fill(locator, String(value));
+     }
+
+     async verifyDialogClosed(){
+        await this.helper.assertNotVisible(this.editTitle);
+     }
+     
+
+     async verifyCalendarVisible(){
+       await this.helper.assertVisible(this.calendarIcon);
+     }
+
+     async verifyErrorMessage(expectedMessage){
+        await this.helper.assertText(this.errorMessage,expectedMessage);
+     }
+
+     async verifyDialogClose(){
+        await this.helper.assertNotVisible(this.editTitle);
+     }
+
+
+
+
+
+   
 
 
 
