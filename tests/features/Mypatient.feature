@@ -32,7 +32,7 @@ Feature: My Patient
     Then Patient name should be displayed for each patient record
 
   Scenario: Details column displays patient information
-    Then Details column should display "phone number", email", " date of birth" for each patient record
+    Then Details column should display "phone number","email","date of birth" for each patient record
 
   Scenario: Details are displayed in multiline format
     Then Phone number, email , date of birth should be displayed on separate lines for each patient record
@@ -50,13 +50,13 @@ Feature: My Patient
     Then Last visit date should be displayed for each patient record
 
   Scenario: Last visit date format
-    Then Last visit date should be displayed in 'dd-mm-yyyy" format for each patient record
+    Then Last visit date should be displayed in "dd-mm-yyyy" format for each patient record
 
   Scenario: 3 button under Actions column for each row
     Then "View Previous Test Reports", "View Previous Diet Plans", "Create New Report/plan" should be displayed for each patient record
 
   Scenario: Edit icon displayed for each row
-    Then Edit icon should be displayed for each patient record
+    Then Edit icon should be displayed for each patient record-
 
   Scenario: Delete icon displayed for each row
     Then Delete icon should be displayed for each patient record
@@ -115,12 +115,14 @@ Feature: My Patient
     When User navigates to any page
     Then Pagination controls should be displayed
 
+  Scenario: Navigate to first page pagination
     When User navigates to the first page of patient record
     Then Previous arrow (<) should be disabled
     And First page arrow (<<) should be disabled
     And Next arrow (>) should be enabled
     And Last page arrow (>>) should be enabled
 
+  Scenario: Navigate to last page pagination
     When User navigates to the last page of patient record
     Then Previous arrow (>) should be disabled
     And First page arrow (>>) should be disabled
