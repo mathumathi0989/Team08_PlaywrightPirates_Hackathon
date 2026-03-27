@@ -1,8 +1,6 @@
-Feature: Patient information section
+Feature: View patient test reports
 
-  Background:
-    Given User logged into the app and patients already exists
-
+  # Patient information section
   Scenario: Correct report opens for selected record
     Given User is in My Patients page
     When User clicks View Previous Test Reports button for a specific record
@@ -38,12 +36,7 @@ Feature: Patient information section
     When User clicks View Previous Test Reports button for a particular record
     Then Close icon "x" should be displayed
 
-
-Feature: View patient test reports - table
-
-  Background:
-    Given User logged into the app and patients already exists
-
+  # View patient test reports - table
   Scenario: Report table is displayed
     Given User is in My Patients page
     When User clicks View Previous Test Reports button for a specific record
@@ -64,11 +57,7 @@ Feature: View patient test reports - table
     When User clicks View Previous Test Reports button for a specific record
     Then Pagination controls First, previous, next, last arrows should be displayed
 
-Feature: Reports table data scenarios
-
-  Background:
-    Given User logged into the app and patients already exists
-
+  # Reports table data scenarios
   Scenario: Record number display
     Given User is in My Patients page
     When User clicks View Previous Test Reports button for a specific record
@@ -94,21 +83,13 @@ Feature: Reports table data scenarios
     When User clicks View Previous Test Reports button for a specific record
     Then Each report should display vitals information
 
-Feature: View PDF
-
-  Background:
-    Given User is in My Patients page after logged into the app and patients already exists
-
+  # View PDF
   Scenario: Corresponding PDF report opens for a record
     Given User is in View Plan Test Reports page
     When User clicks View PDF button for a particular record
     Then Corresponding report for that record should be opened
 
-    Feature: Pagination management with multiple records
-
-  Background:
-    Given User is in view patient test report page with multiple records already exist in the system for that user
-
+  # Pagination management with multiple records
   Scenario: Navigate to the next page using pagination
     Given User is in View Patient Test Reports page with multiple record for the patient
     When User clicks the next page arrow (>)
@@ -134,13 +115,8 @@ Feature: View PDF
     When User clicks any page navigation arrow
     Then Pagination text should display the correct range and total number of patients
 
-Feature: Pagination management with only one record
-
-  Background:
-    Given User is logged into the application and only one patient record already exist in the system for that user
-
+  # Pagination management with only one record
   Scenario: All pagination arrows disabled when only one page exists
     Given User is in My Patient page
     When User clicks on View Patient Test Reports button
     Then First, previous, next, last arrows should be disabled
-

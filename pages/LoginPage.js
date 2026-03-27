@@ -89,7 +89,3 @@ export class LoginPage {
     await this.helper.assertVisible(this.errorMessage);
   }
 }
-
-
-    
-}

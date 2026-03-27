@@ -1,25 +1,27 @@
 import { test as base } from "playwright-bdd";
 
 import { LoginPage } from "../../pages/LoginPage.js";
-// import { DashboardPage } from "../../pages/DashboardPage.js";
+import { DashboardPage } from "../../pages/DashboardPage.js";
 // import { MyPatientPage } from "../../pages/MyPatientPage.js";
 import { AddPatientPage } from "../../pages/AddPatientPage.js";
 import { EditPatientPage } from "../../pages/EditPatientPage.js";
 import { DeletePatientPage } from "../../pages/DeletePatientPage.js";
-import { ViewPatientTestReportsPage } from '../../pages/ViewPatientTestReportsPage.js';
+import { ViewPatientTestReportsPage } from '../../pages/ViewTestReport.js';
 
 // import { ViewTestReportPage } from "../../pages/ViewTestReportPage.js";
 import { logger } from "../../utilities/logger.js";
+const LOGIN_APP_URL = process.env.LOGIN_APP_URL || "http://localhost:4200";
+const LOGIN_URL = new URL("/login", LOGIN_APP_URL).toString();
 
 export const test = base.extend({
     loginPage: async ({ page }, use) => {
-      await page.goto('/login');
+      await page.goto(LOGIN_URL);
       await use(new LoginPage(page));
     },
 
-  //   dashboardPage: async ({ page }, use) => {
-  //     await use(new DashboardPage(page));
-  //   },
+    dashboardPage: async ({ page }, use) => {
+      await use(new DashboardPage(page));
+    },
 
   //   myPatientPage: async ({ page }, use) => {
   //     await use(new MyPatientPage(page));
@@ -39,9 +41,9 @@ export const test = base.extend({
     await use(new DeletePatientPage(page));
   },
 
-  // viewTestReportPage: async ({ page }, use) => {
-  //   await use(new ViewTestReportPage(page));
-  // },
+  viewPatientTestReportsPage: async ({ page }, use) => {
+    await use(new ViewPatientTestReportsPage(page));
+  },
 
   logger: async ({}, use) => {
     await use(logger);

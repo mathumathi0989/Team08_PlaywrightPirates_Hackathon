@@ -16,6 +16,7 @@ const testDir = defineBddConfig({
   features: "tests/features/**/*.feature",
   steps: ["tests/stepDefinitions/**/*.js", 
     "tests/fixtures/testFixtures.js"],
+  missingSteps: "skip-scenario",
 });
 
 const browserDevices = {
