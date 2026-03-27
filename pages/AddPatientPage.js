@@ -24,6 +24,19 @@ export class AddPatientPage {
     this.spInput = this.modal.getByPlaceholder("SP");
     this.dpInput = this.modal.getByPlaceholder("DP");
 
+    // Mapping for Excel
+    this.fieldsMap = {
+            "Firstname": this.fNameInput,
+            "Lastname": this.lNameInput,
+            "Email": this.emailInput,
+            "ContactNumber": this.contactNumInput,
+            "Weight": this.weightInput,
+            "Height": this.heightInput,
+            "Temperature": this.temperatureInput,
+            "SP": this.spInput,
+            "DP": this.dpInput
+        };
+
     //Dropdowns
     this.allergiesDD = this.modal.getByPlaceholder("Allergies");
     this.foodPreferenceDD = this.modal.getByPlaceholder("Food Preference");
@@ -48,6 +61,7 @@ export class AddPatientPage {
 
     //--- Scroll ---
     this.modalBody = page.locator(".modal-body");
+
   }
 
   async clickAddPatientLink() {
@@ -61,20 +75,6 @@ export class AddPatientPage {
     logger.info("Waiting for modal to open");
     await this.modal.waitFor({ state: "visible" });
     logger.info("Add Patient modal is open");
-  }
-
-  inputFieldMap() {
-    return {
-      "First Name": this.fNameInput,
-      "Last Name": this.lNameInput,
-      Email: this.emailInput,
-      "Contact Number": this.contactNumInput,
-      Weight: this.weightInput,
-      Height: this.heightInput,
-      Temperature: this.temperatureInput,
-      SP: this.spInput,
-      DP: this.dpInput,
-    };
   }
 
   getDropdown(dropdownName) {
@@ -92,6 +92,28 @@ export class AddPatientPage {
 
   getDropdownOption(optionText) {
     return this.modal.locator(".multiselect__element", { hasText: optionText });
+  }
+
+  async fillAndTab(headerName, value) {
+        const locator = this.fieldsMap[headerName];
+        if (locator) {
+            await locator.fill(value.toString());
+            await locator.press('Tab');
+            logger.info(`Filled ${headerName} with ${value} and tabbed.`);
+        }
+    }
+
+  async submitNewPatient(testDataHelper, logger) {
+    const firstName = await this.fNameInput.inputValue();
+    const lastName = await this.lNameInput.inputValue();
+    const fullName = `${firstName} ${lastName}`.trim();
+
+    logger.info(`Saving patient: "${fullName}"`);
+
+    // Option A: store full name directly
+    //----- testDataHelper.patientName = fullName; // should come in then
+
+    await this.saveBtn.click();
   }
 
   // async getAllDropdowns() {

@@ -1,7 +1,9 @@
 import { createBdd } from "playwright-bdd";
 import { test } from "../fixtures/testFixtures.js";
 import { expect } from "@playwright/test";
-import { dropdownValues } from "../../test-data/dropdownData.js";
+import { validData, dropdownValues } from "../../testData/dropdownData.js";
+import { getData } from "../../utilities/excelReader.js";
+
 
 const { Given, When, Then } = createBdd(test);
 
@@ -245,5 +247,39 @@ Then(
   async ({ page, logger }, errorMessage) => {
     logger.info(`Verifying DOB error: ${errorMessage}`);
     await expect(page.getByText(errorMessage)).toBeVisible();
+  },
+);
+
+When(
+  "the user enters invalid data for {string} from {string} and tabs away",
+  async ({ addPatientPage, page }, scenarioName, sheetName) => {
+    let testDataRows = getData(sheetName, scenarioName);
+
+    for (const row of testDataRows) {
+      await page.reload();
+      await addPatientPage.clickAddPatientLink();
+      await addPatientPage.verifyAddPatientModal();
+
+      // Go directly to the invalid field
+      const targetField = row["Invalid Field"];
+      const invalidValue = row[targetField];
+      const fieldLocator = addPatientPage.fieldsMap[targetField];
+
+      await fieldLocator.fill(invalidValue);
+      await fieldLocator.press("Tab");
+
+      const errorLocator = fieldLocator
+        .locator("..")
+        .locator(".invalid-feedback, .error-message");
+
+      await expect(errorLocator).toContainText(row["Expected error"]);
+    }
+  },
+);
+
+Then(
+  "the system should display the respective error message for each invalid input",
+  async () => {
+    // already validated in When
   },
 );
