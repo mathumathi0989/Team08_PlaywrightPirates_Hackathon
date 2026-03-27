@@ -1,4 +1,5 @@
 import { logger } from "../utilities/logger.js";
+import { ReusableMethods } from "../utilities/ReusableMethods.js";
 
 export class AddPatientPage {
   constructor(page) {
@@ -25,16 +26,16 @@ export class AddPatientPage {
 
     // Mapping for Excel
     this.fieldsMap = {
-            "Firstname": this.fNameInput,
-            "Lastname": this.lNameInput,
-            "Email": this.emailInput,
-            "ContactNumber": this.contactNumInput,
-            "Weight": this.weightInput,
-            "Height": this.heightInput,
-            "Temperature": this.temperatureInput,
-            "SP": this.spInput,
-            "DP": this.dpInput
-        };
+      Firstname: this.fNameInput,
+      Lastname: this.lNameInput,
+      Email: this.emailInput,
+      ContactNumber: this.contactNumInput,
+      Weight: this.weightInput,
+      Height: this.heightInput,
+      Temperature: this.temperatureInput,
+      SP: this.spInput,
+      DP: this.dpInput,
+    };
 
     //Dropdowns
     this.allergiesDD = this.modal.getByPlaceholder("Allergies");
@@ -60,7 +61,6 @@ export class AddPatientPage {
 
     //--- Scroll ---
     this.modalBody = page.locator(".modal-body");
-
   }
 
   async clickAddPatientLink() {
@@ -74,7 +74,6 @@ export class AddPatientPage {
     await this.modal.waitFor({ state: "visible" });
     logger.info("Add Patient modal is open");
   }
-<<<<<<< HEAD
 
   getDropdown(dropdownName) {
     const mapping = {
@@ -94,13 +93,13 @@ export class AddPatientPage {
   }
 
   async fillAndTab(headerName, value) {
-        const locator = this.fieldsMap[headerName];
-        if (locator) {
-            await locator.fill(value.toString());
-            await locator.press('Tab');
-            logger.info(`Filled ${headerName} with ${value} and tabbed.`);
-        }
+    const locator = this.fieldsMap[headerName];
+    if (locator) {
+      await locator.fill(value.toString());
+      await locator.press("Tab");
+      logger.info(`Filled ${headerName} with ${value} and tabbed.`);
     }
+  }
 
   async submitNewPatient(testDataHelper, logger) {
     const firstName = await this.fNameInput.inputValue();
@@ -118,6 +117,4 @@ export class AddPatientPage {
   // async getAllDropdowns() {
   //   return this.modal.locator("select, [role='combobox'], [class*='dropdown']");
   // }
-=======
->>>>>>> origin/main
 }
