@@ -54,7 +54,7 @@ Background:
 Given After navigating to the My Patient page, the logged-in user clicks the edit icon
 And User is edit dialog box
 
-
+@smoke
 Scenario Outline: Edit name field with valid data
 When User clicks submit after editing "<field>" with valid data
 Then User should redirected to my patient with edited value in "<field>"

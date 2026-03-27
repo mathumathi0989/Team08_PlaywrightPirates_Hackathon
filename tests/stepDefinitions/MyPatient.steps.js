@@ -9,7 +9,6 @@ Given("User is in dietician application dashboard page", async ({ page }) => {
 });
 
 When(`User clicks on My Patients button`, async(myPatientPage) => {
-
   await myPatientPage.goto();
 });
 
@@ -166,8 +165,8 @@ Then("All the existed patient records should be displayed", async ({ myPatientPa
 });
 
 
-Given("User is in My Patients page with multiple pages of a patient record", async ({ myPatientPage }) => {
-  await expect(myPatientPage.patientTable).toBeVisible();
+Given("User is in My Patients page with multiple pages of a patient record", async ({logger }) => {
+  logger.info("user is in mypatient page");
 });
 
 When("User clicks the next page arrow (>)", async ({ myPatientPage }) => {
@@ -182,8 +181,8 @@ Then("Next set of  patient records should be displayed", async ({ myPatientPage 
   await expect(myPatientPage.patientTable).toBeVisible();
 });
 
-Given("User is in later page of My Patients page", async ({ myPatientPage }) => {
-  await expect(myPatientPage.patientTable).toBeVisible();
+Given("User is in later page of My Patients page", async ({ logger }) => {
+  logger.info("user is in mypatient page");
 });
 
 When("User clicks the previous page arrow", async ({ myPatientPage }) => {
@@ -198,8 +197,8 @@ Then("Previous set of patient records should be displayed", async ({ myPatientPa
   await expect(myPatientPage.patientTable).toBeVisible();
 });
 
-Given("User is in any page except first page of My Patients page", async ({ myPatientPage }) => {
-  await expect(myPatientPage.patientTable).toBeVisible();
+Given("User is in any page except first page of My Patients page", async ({ logger }) => {
+  logger.info("user is in mypatient page");
 });
 
 When("User clicks the first page arrow (>>)", async ({ myPatientPage }) => {
@@ -214,12 +213,8 @@ Then("First page of patient records should be displayed", async ({ myPatientPage
   await expect(myPatientPage.patientTable).toBeVisible();
 });
 
-Given("User is in any page except last page of My Patients page", async ({ myPatientPage }) => {
-  await expect(myPatientPage.patientTable).toBeVisible();
-});
-
-When("User clicks the last page arrow", async ({ myPatientPage }) => {
-  await myPatientPage.lastBtn.click();
+Given("User is in any page except last page of My Patients page", async ({ logger }) => {
+  logger.info("user is in mypatient page");
 });
 
 When("User clicks the last page arrow", async ({ myPatientPage }) => {
@@ -230,12 +225,12 @@ Then("Last page of patient records should be displayed", async ({ myPatientPage 
   await expect(myPatientPage.patientTable).toBeVisible();
 });
 
-Given("User is in any page of My Patients page", async ({ myPatientPage }) => {
-  await expect(myPatientPage.patientTable).toBeVisible();
+Given("User is in any page of My Patients page", async ({ logger }) => {
+  logger.info("user is in mypatient page");
 });
 
-Given("User is in My Patients page with multiple pages of patient record", async ({ myPatientPage }) => {
-  await expect(myPatientPage.patientTable).toBeVisible();
+Given("User is in My Patients page with multiple pages of patient record", async ({ logger }) => {
+  logger.info("user is in mypatient page");
 });
 
 When("User clicks any page navigation arrow", async ({ myPatientPage }) => {

@@ -29,7 +29,6 @@ logger.info("user should see the edit patient page");
 
 Then('User should see {string} and enabled', async ({logger,editPatientPage}, buttonName) => {
  logger.info("user should see on submit button in patient page");
- console.log("user should see other buttons");
   editPatientPage.verifySubmitCloseButton(buttonName);
 });
 
@@ -67,10 +66,6 @@ Then('User should see {string} text', async ({editPatientPage}, text) => {
 
 Given('After navigating to the My Patient page, the logged-in user clicks the edit icon', async ({editPatientPage,deletePatientPage,testDataHelper,logger}) => {
   logger.info("Patient page - authenticated");
-
-    const row = getData('EditPatient','Valid User');
-    console.log("------------firstname from data "+row.Firstname);
-    console.log("-------------last name from data"+ row.Lastname);
   //chaining
    await deletePatientPage.searchPatient(testDataHelper.patientName);
   await editPatientPage.editDeleteAction({edit:true});

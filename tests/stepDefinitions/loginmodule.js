@@ -5,11 +5,10 @@ const { Given, When, Then } = createBdd(test);
 
 Given('User is on the browser', async ({logger}) => {
   logger.info("User opens browser");
-  // Browser is already open by Playwright
 });
 
-When('User enters app url', async ({ page }) => {
-  console.log("User navigates to app URL");
+When('User enters app url', async ({ page, logger }) => {
+  logger.info("User navigates to app URL");
   await page.goto('/');
 });
 
@@ -91,8 +90,8 @@ Then('User should see exactly two input fields', async ({ page }) => {
 
 
 
-Given('User is on the login page', async ({ page }) => {
-  console.log("User is on login page");
+Given('User is on the login page', async ({ page, logger }) => {
+  logger.log("User is on login page");
   await page.goto('/');
 });
 
@@ -129,14 +128,14 @@ Then('Navigation bar should display exactly four links {string}, {string}, {stri
   expect(navLinks.length).toBe(4);
 });
 
-Given('User logged into the app', async ({ page, loginPage }) => {
-  console.log("User authentication - logged in");
+Given('User logged into the app', async ({ page, loginPage ,logger}) => {
+  logger.info("User authentication - logged in");
   await page.goto('/');
   await loginPage.login('validUsername', 'validPassword');
 });
 
-Given('User is on the Dashboard page', async ({ page }) => {
-  console.log("User is on Dashboard page");
+Given('User is on the Dashboard page', async ({ page ,logger}) => {
+  logger.info("User is on Dashboard page");
   await expect(page).toHaveURL(/.*dashboard/);
 });
 

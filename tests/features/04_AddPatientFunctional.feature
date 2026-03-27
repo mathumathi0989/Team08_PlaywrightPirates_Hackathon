@@ -1,3 +1,4 @@
+@addPatient
 Feature: Add Patient - Functional Tests
 
   Background:
@@ -32,6 +33,7 @@ Feature: Add Patient - Functional Tests
     When User fills all mandatory fields with valid data
     Then User should see Submit button in enabled state
 
+  @smoke
   Scenario: Success message after valid submission
     When User fills all mandatory fields with valid data
     And User clicks Submit button
@@ -62,7 +64,7 @@ Feature: Add Patient - Functional Tests
 
   Scenario: Valid date is displayed in MM/DD/YYYY format
     When User selects valid date "01/12/2000" in DOB field
-    Then User should see selected date "01/12/2000" in MM/DD/YYYY format
+    Then User should see selected date "01/12/2000" in MM DD YYYY format
 
   Scenario Outline: DOB field validation errors
     When User enters "<date>" in DOB field and tabs away

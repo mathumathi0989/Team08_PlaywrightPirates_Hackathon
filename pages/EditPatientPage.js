@@ -6,33 +6,33 @@ export class EditPatientPage{
         this.page = page;
         this.helper = new ReusableMethods(page);
 
-        this.editButton = this.page.locator();
-        this.editTitle = this.page.locator();
-        this.editFirstName = this.page.locator();
-        this.editSubmitButton = this.page.locator();
-        this.editCloseButton = this.page.locator();
+        this.editButton = this.page.getByRole('button', { name: 'Edit' });
+        this.editTitle = this.page.getByText('Edit Patient');
+        this.editFirstName = this.page.getByLabel('First name');
+        this.editSubmitButton = this.page.getByRole('button', { name: 'Submit' });
+        this.editCloseButton = this.page.getByRole('button', { name: 'Close' });
         this.inputFields = this.page.locator('input');
         this.dropdownFields = this.page.locator('select');
         this.fileUpload = this.page.locator('input[type="file"]');
 
-        this.firstNameField = this.page.locator();
-        this.lastNameField = this.page.locator();
-        this.emailField = this.page.locator();
-        this.contactField = this.page.locator();
-        this.allergyField = this.page.locator();
-        this.foodPrefField = this.page.locator();
-        this.cuisineField = this.page.locator();
-        this.dobField = this.page.locator();
-        this.vitalsTitle = this.page.locator();
-        this.spField = this.page.locator();
-        this.dpField = this.page.locator();
-        this.weightField = this.page.locator();
-        this.heightField = this.page.locator();
-        this.tempartureField = this.page.locator();
-        this.uploadLabel = this.page.locator();
-        this.noFileChosenText = this.page.locator();
-        this.calendarIcon = this.page.locator();
-        this.errorMessage = this.page.locator();
+        this.firstNameField = this.page.getByLabel('First name');
+        this.lastNameField = this.page.getByLabel('Last name');
+        this.emailField = this.page.getByLabel('Email');
+        this.contactField = this.page.getByLabel('Contact Number');
+        this.allergyField = this.page.getByLabel('Allergies');
+        this.foodPrefField = this.page.getByLabel('Food Preference');
+        this.cuisineField = this.page.getByLabel('Cuisine Category');
+        this.dobField = this.page.getByLabel('Date of Birth');
+        this.vitalsTitle = this.page.getByText('Vitals');
+        this.spField = this.page.getByLabel('SP');
+        this.dpField = this.page.getByLabel('DP');
+        this.weightField = this.page.getByLabel('Weight');
+        this.heightField = this.page.getByLabel('Height');
+        this.tempartureField = this.page.getByLabel('Temperature');
+        this.uploadLabel = this.page.getByText('Choose Files');
+        this.noFileChosenText = this.page.getByText('No file chosen');
+        this.calendarIcon = this.page.getByRole('button', { name: 'Calendar' });
+        this.errorMessage = this.page.locator('.invalid-feedback, .error-message');
 
        
     }

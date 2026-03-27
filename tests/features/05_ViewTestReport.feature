@@ -1,3 +1,4 @@
+@viewTestReport
 Feature: Patient information section
 
   Background:

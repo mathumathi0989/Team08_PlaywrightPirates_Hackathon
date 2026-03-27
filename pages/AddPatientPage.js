@@ -88,7 +88,17 @@ export class AddPatientPage {
     return dropdown;
   }
 
-  getDropdownOption(optionText) {
+  async getNewPatient(testDataHelper, logger) {
+    const firstName = await this.fNameInput.inputValue();
+    const lastName = await this.lNameInput.inputValue();
+    const fullName = `${firstName} ${lastName}`.trim();
+
+    logger.info(`Saving patient: "${fullName}"`);
+    // chaining 
+    testDataHelper.patientName = this.fullName; 
+  }
+
+   getDropdownOption(optionText) {
     return this.modal.locator(".multiselect__element", { hasText: optionText });
   }
 
@@ -101,13 +111,5 @@ export class AddPatientPage {
     }
   }
 
-  async submitNewPatient(testDataHelper, logger) {
-    const firstName = await this.fNameInput.inputValue();
-    const lastName = await this.lNameInput.inputValue();
-    const fullName = `${firstName} ${lastName}`.trim();
-
-    logger.info(`Saving patient: "${fullName}"`);
-    await this.saveBtn.click();
-  }
 
 }

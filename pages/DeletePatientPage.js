@@ -6,10 +6,10 @@ export class DeletePatientPage{
 constructor(page){
 this.page = page;
 this.helper = new ReusableMethods(page);
-this.myPatients = this.page.locator('');
-this.deleteIconButton = this.page.locator('');
-this.searchInput = this.page.locator('');
-this.toastMessage = this.page.locator('');
+this.myPatients = this.page.getByRole('heading', { name: 'My Patients' });
+this.deleteIconButton = this.page.getByRole('button', { name: 'delete' });
+this.searchInput = this.page.getByPlaceholder('Search');
+this.toastMessage = this.page.getByRole('alert');
 
 }
     

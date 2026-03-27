@@ -1,3 +1,4 @@
+@addPatientUI
 Feature: Add Patient Dialog Box - Validation
 
   Background:
@@ -14,7 +15,7 @@ Feature: Add Patient Dialog Box - Validation
     Then User should see 3 dropdowns in the Add Patient Details dialog box
 
   Scenario: Validate presence of a Date Picker field
-    Then User should see a date picker for DOB field with MM/DD/YYYY displayed
+    Then User should see a date picker for DOB field with MM DD YYYY displayed
 
   Scenario: Validate Presence of file Upload option
     Then User should see exactly 1 file upload option in Add Patient Details dialog box
