@@ -11,11 +11,8 @@ const logger = winston.createLogger({
     winston.format.splat(),
     winston.format.json(),
   ),
-//  defaultMeta: { service: "dietician-playwright-framework" },
-  transports: [
-    new winston.transports.File({ filename: "logs/combined.log" }),
-  ],
+  //  defaultMeta: { service: "dietician-playwright-framework" },
+  transports: [new winston.transports.File({ filename: "logs/combined.log" })],
 });
-
 
 export { logger };

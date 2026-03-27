@@ -4,8 +4,22 @@ import { test } from "../fixtures/testFixtures.js";
 
 const {Given,When,Then} = createBdd(test);
 
+<<<<<<< HEAD
+//   expect(isValid).toBeTruthy();
+// });
+
+// Then('"Showing 0 to 0 of 0 patients" should be displayed', async() =>  {
+//   const text = await myPatientPage.getPaginationText();
+//   expect(text).toContain('0 to 0 of 0');
+// });
+
+let myPatientPage;
+Given(`User is in dietician application dashboard page`, async(page) => {
+await page.got(url);    
+=======
 Given("User is in dietician application dashboard page", async ({ page }) => {
   await page.goto("/");
+>>>>>>> origin/main
 });
 
 When(`User clicks on My Patients button`, async(myPatientPage) => {
@@ -17,6 +31,85 @@ Then(`Page header {string} should be displayed`, async() => {
     await expect(this.page.locator()).toBeVisible();
 });
 
+<<<<<<< HEAD
+// Then('All pagination arrows (First, Previous, Next, Last) should be disabled',
+// async() =>  {
+//   const buttons = this.page.locator('button[disabled]');
+//   expect(await buttons.count()).toBeGreaterThan(0);
+// });
+
+// /*Then(`Pagination text should display the correct range and total number of patients`, async() => {
+//     // [Then] Describes the expected outcome or result of the scenario.
+// });
+
+// Given(`User is in My Patients page with multiple pages of patient record`, async() => {
+//     // [Given] Sets up the initial state of the system.
+// });
+
+// When(`User navigates to any page`, async() => {
+//     // [When] Describes the action or event that triggers the scenario.
+// });
+
+// Then(`Pagination controls should be displayed`, async() => {
+//     // [Then] Describes the expected outcome or result of the scenario.
+// });
+
+// When(`User navigates to the first page of patient record`, async() => {
+//     // [When] Describes the action or event that triggers the scenario.
+// });
+
+// Then(`Previous arrow \(<) should be disabled`, async() => {
+//     // [Then] Describes the expected outcome or result of the scenario.
+// });
+
+// Then(`First page arrow \(<<) should be disabled`, async() => {
+//     // [Then] Describes the expected outcome or result of the scenario.
+// });
+
+// Then(`Next arrow \(>) should be enabled`, async() => {
+//     // [Then] Describes the expected outcome or result of the scenario.
+// });
+
+// Then(`Last page arrow \(>>) should be enabled`, async() => {
+//     // [Then] Describes the expected outcome or result of the scenario.
+// });
+
+// When(`User navigates to the last page of patient record`, async() => {
+//     // [When] Describes the action or event that triggers the scenario.
+// });
+
+// Then(`Previous arrow \(>) should be disabled`, async() => {
+//     // [Then] Describes the expected outcome or result of the scenario.
+// });
+
+// Then(`First page arrow \(>>) should be disabled`, async() => {
+//     // [Then] Describes the expected outcome or result of the scenario.
+// });
+
+// Then(`Next arrow \(<) should be enabled`, async() => {
+//     // [Then] Describes the expected outcome or result of the scenario.
+// });
+
+// Then(`Last page arrow \(<<) should be enabled`, async() => {
+//     // [Then] Describes the expected outcome or result of the scenario.
+// });
+
+// Then(`First, previous, next, last arrows should be disabled`, async() => {
+//     // [Then] Describes the expected outcome or result of the scenario.
+// });
+
+// Then(`{string} should be displayed`, (arg0: string) => {
+//     // [Then] Describes the expected outcome or result of the scenario.
+// });
+
+// Then(`All pagination arrows \(First, Previous, Next, Last) should be disabled`, async() => {
+//     // [Then] Describes the expected outcome or result of the scenario.
+// });
+
+// Then(`If no patient data exists, the text {string} should be displayed`, (arg0: string) => {
+//     // [Then] Describes the expected outcome or result of the scenario.
+// }); */
+=======
 Then('Page header {string} should be displayed', async ({ myPatientPage }, title) => {
   await expect(myPatientPage.pageTitle).toHaveText(title);
 });
@@ -368,3 +461,4 @@ Then(`All pagination arrows \(First, Previous, Next, Last) should be disabled`, 
 Then(`If no patient data exists, the text {string} should be displayed`, (arg0: string) => {
     // [Then] Describes the expected outcome or result of the scenario.
 }); */
+>>>>>>> origin/main
