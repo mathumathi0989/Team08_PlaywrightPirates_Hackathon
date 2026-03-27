@@ -43,6 +43,7 @@ Scenario: Total number of input fields
 Background:
   Given User is on the login page
 
+@smoke
 Scenario: Login with valid credentials
   When User clicks login button after entering valid credentials
   Then User should be redirected to dashboard page

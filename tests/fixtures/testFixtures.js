@@ -9,34 +9,33 @@ import { DeletePatientPage } from "../../pages/DeletePatientPage.js"
 
 import { ViewTestReportPage } from "../../pages/ViewTestReport.js";
 import { logger } from "../../utilities/logger.js";
-import {TestDataHelper} from "../../utilities/TestDataHelper.js";
-
+import { TestDataHelper } from "../../utilities/TestDataHelper.js";
 
 export const test = base.extend({
-    loginPage: async ({ page }, use) => {
-      await page.goto('/login');
-      await use(new LoginPage(page));
-    },
+  loginPage: async ({ page }, use) => {
+    await page.goto("/login");
+    await use(new LoginPage(page));
+  },
 
-    dashboardPage: async ({ page }, use) => {
-      await use(new DashboardPage(page));
-    },
+  dashboardPage: async ({ page }, use) => {
+    await use(new DashboardPage(page));
+  },
 
-    myPatientPage: async ({ page }, use) => {
-      await use(new MyPatientPage(page));
-    },
+  myPatientPage: async ({ page }, use) => {
+    await use(new MyPatientPage(page));
+  },
 
   addPatientPage: async ({ page }, use) => {
     await use(new AddPatientPage(page));
   },
 
   editPatientPage: async ({ page }, use) => {
-    await page.goto('/');
+    await page.goto("/");
     await use(new EditPatientPage(page));
   },
 
   deletePatientPage: async ({ page }, use) => {
-    await page.goto('/');
+    await page.goto("/");
     await use(new DeletePatientPage(page));
   },
 
@@ -49,12 +48,11 @@ export const test = base.extend({
     await use(new ViewTestReportPage(page));
  },
 
-  logger: async ({ page }, use) => {
+  logger: async ({page}, use) => {
     await use(logger);
   },
 
-  testDataHelper: async({page}, use) => {
+  testDataHelper: async ({ page }, use) => {
     await use(new TestDataHelper(page));
-  }
+  },
 });
-

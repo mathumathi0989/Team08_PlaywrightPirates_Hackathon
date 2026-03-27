@@ -36,17 +36,17 @@ Feature: Patient information section
 
   Scenario: Navigate to first page pagination
     When User navigates to the first page of patient record
-    Then Previous arrow (<) should be disabled
-    And First page arrow (<<) should be disabled
-    And Next arrow (>) should be enabled
-    And Last page arrow (>>) should be enabled
+    Then Previous arrow should be disabled
+    And First page arrow should be disabled
+    And Next arrow should be enabled
+    And Last page arrow should be enabled
 
   Scenario: Navigate to last page pagination
     When User navigates to the last page of patient record
-    Then Previous arrow (>) should be disabled
-    And First page arrow (>>) should be disabled
-    And Next arrow (<) should be enabled
-    And Last page arrow (<<) should be enabled
+    Then Previous arrow should be disabled
+    And First page arrow should be disabled
+    And Next arrow should be enabled
+    And Last page arrow should be enabled
 
   Scenario: All pagination arrows disabled when only one page exists
     Given User is in dietician application dashboard page
@@ -58,20 +58,4 @@ Feature: Patient information section
 
   Scenario: All pagination arrows disabled in report table
     Then First, previous, next, last arrows should be disabled
-   # Following sceanrios are combined in the above code.
-  # Scenario: Navigate to the next page using pagination
-  #   Given User is in View Patient Test Reports page with multiple record for the patient
-  #   When User clicks the next page arrow (>)
-  #   Then Next set of patient records should be displayed
-  # Scenario: Navigate to the previous page using pagination
-  #   Given User is in Report table of View Patient Test Reports page
-  #   When User clicks the previous page arrow (<)
-  #   Then Previous set of patient records should be displayed
-  # Scenario: Navigate to the first page using pagination
-  #   Given User is in any page except first page of Report table
-  #   When User clicks the first page arrow (>>)
-  #   Then First page of patient records should be displayed
-  # Scenario: Navigate to the last page using pagination
-  #   Given User is in any page except last page of Report table
-  #   When User clicks the last page arrow (<<)
-  #   Then Last page of patient records should be displayed
+  
