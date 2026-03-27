@@ -13,9 +13,6 @@ When(`User clicks on My Patients button`, async(myPatientPage) => {
   await myPatientPage.goto();
 });
 
-Then(`Page header {string} should be displayed`, async() => {
-    await expect(this.page.locator()).toBeVisible();
-});
 
 Then('Page header {string} should be displayed', async ({ myPatientPage }, title) => {
   await expect(myPatientPage.pageTitle).toHaveText(title);
