@@ -6,11 +6,34 @@ export class EditPatientPage{
         this.page = page;
         this.helper = new ReusableMethods(page);
 
-        this.editButton = page.locator();
-        this.editTitle = page.locator();
-        this.editFirstName = page.locator();
-        this.editSubmitButton = page.locator();
-        this.editCloseButton = page.locator();
+        this.editButton = this.page.locator();
+        this.editTitle = this.page.locator();
+        this.editFirstName = this.page.locator();
+        this.editSubmitButton = this.page.locator();
+        this.editCloseButton = this.page.locator();
+        this.inputFields = this.page.locator('input');
+        this.dropdownFields = this.page.locator('select');
+        this.fileUpload = this.page.locator('input[type="file"]');
+
+        this.firstNameField = this.page.locator();
+        this.lastNameField = this.page.locator();
+        this.emailField = this.page.locator();
+        this.contactField = this.page.locator();
+        this.allergyField = this.page.locator();
+        this.foodPrefField = this.page.locator();
+        this.cuisineField = this.page.locator();
+        this.dobField = this.page.locator();
+        this.vitalsTitle = this.page.locator();
+        this.spField = this.page.locator();
+        this.dpField = this.page.locator();
+        this.weightField = this.page.locator();
+        this.heightField = this.page.locator();
+        this.tempartureField = this.page.locator();
+        this.uploadLabel = this.page.locator();
+        this.noFileChosenText = this.page.locator();
+
+
+       
     }
 
     async editDeleteAction({edit, deleteAction} = {}){
@@ -37,5 +60,55 @@ export class EditPatientPage{
             await this.helper.assertEnabled(this.editCloseButton);
         }
     }
+
+    #fieldMap(){
+        return {
+            'First Name': this.firstNameField,
+            'Last Name': this.lastNameField,
+            'Email': this.emailField,
+            'Contact Number': this.contactField,
+            'Allergy': this.allergyField,
+            'Food Preference': this.foodPrefField,
+            'Cuisine Category': this.cuisineField,
+            'Date of Birth': this.dobField,
+        };
+    }
+
+    async verifyFieldPopulated(fieldName){
+        const locator = this.#fieldMap()[fieldName];
+        await this.helper.assertVisible(locator);
+       if(!await locator.inputValue()){
+        throw new Error();
+       }
+    }
+  
+     async verifyVitalsTitle(){
+        await this.helper.assertVisible(this.vitalsTitle);
+     }
+
+     async clearFields(fieldName){
+          const locator = this.#fieldMap()[fieldName];
+          await locator.clear();
+
+     }
+     async verifyUploadHealthReportLabel(){
+        await this.helper.assertVisible(this.uploadLabel);
+     }
+
+  
+     async verifyNoFileChosenText(){
+        await this.helper.assertVisible(this.noFileChosenText);
+     }
+
+
+
+
+
+
+
+
+
+
+
 
 }

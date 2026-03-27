@@ -2,42 +2,42 @@ import { test as base } from "playwright-bdd";
 
 import { LoginPage } from "../../pages/LoginPage.js";
 import { DashboardPage } from "../../pages/DashboardPage.js";
-// import { MyPatientPage } from "../../pages/MyPatientPage.js";
+import { MyPatientPage } from "../../pages/MyPatientPage.js";
 import { AddPatientPage } from "../../pages/AddPatientPage.js";
 import { EditPatientPage } from "../../pages/EditPatientPage.js";
 import { DeletePatientPage } from "../../pages/DeletePatientPage.js";
-import { ViewPatientTestReportsPage } from '../../pages/ViewTestReport.js';
-
-// import { ViewTestReportPage } from "../../pages/ViewTestReportPage.js";
+import { ViewPatientTestReportsPage } from "../../pages/ViewTestReport.js";
 import { logger } from "../../utilities/logger.js";
+import { TestDataHelper } from "../../utilities/TestDataHelper.js";
+
 const LOGIN_APP_URL = process.env.LOGIN_APP_URL || "http://localhost:4200";
 const LOGIN_URL = new URL("/login", LOGIN_APP_URL).toString();
 
 export const test = base.extend({
-    loginPage: async ({ page }, use) => {
-      await page.goto(LOGIN_URL);
-      await use(new LoginPage(page));
-    },
+  loginPage: async ({ page }, use) => {
+    await page.goto(LOGIN_URL);
+    await use(new LoginPage(page));
+  },
 
-    dashboardPage: async ({ page }, use) => {
-      await use(new DashboardPage(page));
-    },
+  dashboardPage: async ({ page }, use) => {
+    await use(new DashboardPage(page));
+  },
 
-  //   myPatientPage: async ({ page }, use) => {
-  //     await use(new MyPatientPage(page));
-  //   },
+  myPatientPage: async ({ page }, use) => {
+    await use(new MyPatientPage(page));
+  },
 
   addPatientPage: async ({ page }, use) => {
     await use(new AddPatientPage(page));
   },
 
   editPatientPage: async ({ page }, use) => {
-    await page.goto('/');
+    await page.goto("/");
     await use(new EditPatientPage(page));
   },
 
   deletePatientPage: async ({ page }, use) => {
-    await page.goto('/');
+    await page.goto("/");
     await use(new DeletePatientPage(page));
   },
 
@@ -48,11 +48,8 @@ export const test = base.extend({
   logger: async ({}, use) => {
     await use(logger);
   },
+
+  testDataHelper: async ({ page }, use) => {
+    await use(new TestDataHelper(page));
+  },
 });
-// All step files must import Given/When/Then from HERE — never from playwright-bdd directly
-
-// const { Given, When, Then } = createBdd(test);
-
-// export { Given, When, Then };
-
-// export { expect } from "@playwright/test";

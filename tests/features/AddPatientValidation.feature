@@ -76,5 +76,8 @@ Feature: Add Patient Dialog Box - Validation
   Scenario: Validate Presence of No file Chosen when no files uploaded
     Then User should see text No file Chosen
 
+  Scenario: Validate Presence of Chosen files button
+    Then User should see the Choose Files button
+
   Scenario: Validate Presence of scroll bar on the dialog box
     Then User should see a scroll bar at the right side of dialog box
