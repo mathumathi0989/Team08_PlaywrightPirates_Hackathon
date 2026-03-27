@@ -33,7 +33,7 @@ pipeline{
             withEnv(['PATH+EXTRA=/opt/homebrew/bin:/usr/local/bin']) {
                 sh 'node --version'
                 sh 'npm --version'
-                sh 'npm ci'
+                sh 'npm install'
                 sh 'npx playwright install --with-deps'
             }
         }
