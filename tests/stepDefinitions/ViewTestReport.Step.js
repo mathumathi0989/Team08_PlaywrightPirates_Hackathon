@@ -13,12 +13,6 @@ When("User clicks View Previous Test Reports button for a specific record",async
   }
 );
 
-// When("User clicks View Previous Test Reports button for a particular record",async ({ myPatientPage }) => {
-//     await myPatientPage.viewTestReportsBtn.first().click();
-//   }
-// );
-
-
 Then("Corresponding report for that record should be opened",async ({ viewReportPage }) => {
     await expect(viewReportPage.modal).toBeVisible();
   }

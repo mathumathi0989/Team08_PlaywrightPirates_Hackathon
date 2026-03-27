@@ -8,7 +8,6 @@ export class ViewTestReportPage {
     this.myPatientsButton = page.getByRole("link", { name: /my patients/i });
     this.viewPreviousTestReportsButtons = page.getByRole("button", { name: /view previous test reports/i });
     this.viewPdfButtons = page.getByRole("button", { name: /view pdf/i });
-
   
     this.reportDialog = page.locator('[role="dialog"]').filter({ hasText: /view patient test reports/i }).first();
     this.pageHeader = page.getByRole("heading", { name: /view patient test reports/i }).first();
@@ -25,7 +24,6 @@ export class ViewTestReportPage {
     this.reportsTable = page.locator("table").first();
     this.tableHeaders = this.reportsTable.locator("thead th");
     this.tableRows = this.reportsTable.locator("tbody tr");
-
   
     this.recordNumberCells = this.reportsTable.locator("tbody tr td:nth-child(1)");
     this.fileCells = this.reportsTable.locator("tbody tr td:nth-child(2)");
@@ -33,7 +31,6 @@ export class ViewTestReportPage {
     this.fileNameCells = this.reportsTable.locator("tbody tr td:nth-child(4)");
     this.vitalsCells = this.reportsTable.locator("tbody tr td:nth-child(5)");
     this.healthConditionCells = this.reportsTable.locator("tbody tr td:nth-child(6)");
-
 
     this.firstBtn = page.locator('button:has-text("<<"), button[aria-label*="first" i]').first();
     this.prevBtn = page.locator('button:has-text("<"), button[aria-label*="previous" i]').first();

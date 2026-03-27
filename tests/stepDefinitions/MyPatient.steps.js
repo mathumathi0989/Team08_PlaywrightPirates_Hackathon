@@ -2,16 +2,20 @@ import { createBdd } from "playwright-bdd";
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/testFixtures.js";
 
-const { Given, When, Then } = createBdd(test);
+const {Given,When,Then} = createBdd(test);
 
 Given("User is in dietician application dashboard page", async ({ page }) => {
   await page.goto("/");
 });
 
-When("User clicks on My Patients button", async ({ dashboardPage }) => {
-  await dashboardPage.clickMyPatients();
+When(`User clicks on My Patients button`, async(myPatientPage) => {
+
+  await myPatientPage.goto();
 });
 
+Then(`Page header {string} should be displayed`, async() => {
+    await expect(this.page.locator()).toBeVisible();
+});
 
 Then('Page header {string} should be displayed', async ({ myPatientPage }, title) => {
   await expect(myPatientPage.pageTitle).toHaveText(title);
@@ -28,7 +32,6 @@ Then("Search icon should be displayed inside the search bar", async ({ myPatient
 Then("Placeholder text {string} should be displayed", async ({ myPatientPage }, text) => {
   await expect(myPatientPage.searchBox).toHaveAttribute("placeholder", text);
 });
-
 
 Then(
   "{string}, {string}, {string} , {string}, {string} , {string} should be displayed",
@@ -72,7 +75,6 @@ Then(
 
 Then("Phone number, email , date of birth should be displayed on separate lines for each patient record", async ({ myPatientPage }) => {
   const text = (await myPatientPage.tableRows.first().textContent()) || "";
-  // best-effort multiline check: at least 2 line breaks
   expect(text.split(/\r?\n/).filter(Boolean).length).toBeGreaterThan(1);
 });
 
@@ -123,7 +125,7 @@ Then("My Patients page should display with empty table", async ({ myPatientPage 
   expect(count).toBe(0);
 });
 
-// ---- Sorting ----
+
 When("User clicks an sorting arrow in Patient Id column", async ({ myPatientPage }) => {
   await myPatientPage.headerCellByName("Patient Id").click();
 });
@@ -140,7 +142,7 @@ Then("Patient records should be sorted in ascending or descending order by name"
   await expect(myPatientPage.patientTable).toBeVisible();
 });
 
-// ---- Search ----
+
 When("User searches using patient name", async ({ myPatientPage }) => {
   await myPatientPage.searchPatient("Ram");
 });
@@ -166,7 +168,7 @@ Then("All the existed patient records should be displayed", async ({ myPatientPa
   expect(count).toBeGreaterThan(0);
 });
 
-// ---- Pagination ----
+
 Given("User is in My Patients page with multiple pages of a patient record", async ({ myPatientPage }) => {
   await expect(myPatientPage.patientTable).toBeVisible();
 });
@@ -240,13 +242,12 @@ Given("User is in My Patients page with multiple pages of patient record", async
 });
 
 When("User clicks any page navigation arrow", async ({ myPatientPage }) => {
-  // best-effort: click next if enabled
+
   await myPatientPage.nextBtn.click({ trial: true }).catch(() => { });
 });
 
 Then("Pagination text should display the correct range and total number of patients", async ({ myPatientPage }) => {
   const text = await myPatientPage.getPaginationText();
-  // Very light validation: expect it to contain "Showing" if present at all
   if (text) expect(text.toLowerCase()).toContain("showing");
 });
 
@@ -293,11 +294,9 @@ Then('If no patient data exists, the text "Showing 0 to 0 of 0 patients" should 
   expect(text).toContain("Showing 0 to 0 of 0 patients");
 });
 
-// function escapeRegExp(s) {
-//   return String(s).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-// }
 
 
+// Following scenarios are used in a different shared file
 /*Then(`Pagination text should display the correct range and total number of patients`, async() => {
     // [Then] Describes the expected outcome or result of the scenario.
 });

@@ -15,13 +15,12 @@ const HEADLESS = process.env.HEADLESS !== "false";
 const testDir = defineBddConfig({
   features: "tests/features/**/*.feature",
   steps: ["tests/stepDefinitions/**/*.js", "tests/fixtures/testFixtures.js"],
-  outputDir: '.features-gen', 
 });
 
 const browserDevices = {
   chromium: devices["Desktop Chrome"],
   firefox: devices["Desktop Firefox"],
-  webkit: devices["Desktop Safari"],
+   webkit: devices["Desktop Safari"],
   edge: devices["Desktop Edge"],
 };
 
@@ -75,9 +74,10 @@ export default defineConfig({
       testMatch: [
         // '**/.features-gen/**/EditPatient.feature.spec.js',
         // '**/.features-gen/**/DeletePatient.feature.spec.js',],
+
         "**/.features-gen/**/*.feature.spec.js",
       ],
-      dependencies: [`setup - ${BROWSER}`],
+      //dependencies: [`setup - ${BROWSER}`],
     },
   ],
 });

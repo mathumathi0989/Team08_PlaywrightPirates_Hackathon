@@ -4,24 +4,17 @@ export class MyPatientPage {
     this.url = "/readpatients";
 
     this.pageHeader = page.getByRole("heading", { name: /my patients/i }).first();
-
-
     this.searchBox = page.locator('input[placeholder*="Search"]').first();
     this.searchIcon = page.locator('input[placeholder*="Search"]')
-
-
     this.patientTable = page.locator("table").first();
     this.tableHeaderCells = this.patientTable.locator("thead tr th");
     this.tableRows = this.patientTable.locator("tbody tr");
 
-
     this.viewTestReportsBtn = this.patientTable.getByRole("button", { name: /view previous test reports/i });
     this.viewDietPlansBtn = this.patientTable.getByRole("button", { name: /view previous diet plans/i });
     this.createNewReportPlanBtn = this.patientTable.getByRole("button", { name: /create new report\/plan/i });
-
     this.editButton = this.patientTable.getByRole("button", { name: /Edit/i });
     this.deleteButton = this.patientTable.getByRole("button", { name: /Delete/i });
-
 
     this.paginationText = page.locator(".pagination-info, [data-testid*='pagination' i], .pagination").first();
     this.firstBtn = page.locator('button:has-text("<<"), button[aria-label*="first" i]').first();

@@ -52,6 +52,13 @@ Feature: Patient information section
     Given User is in dietician application dashboard page
     When User clicks on My Patients button
     Then First, previous, next, last arrows should be disabled
+
+  Scenario: Pagination count is updated correctly
+    Then Pagination text should display the correct range and total number of patients
+
+  Scenario: All pagination arrows disabled in report table
+    Then First, previous, next, last arrows should be disabled
+   # Following sceanrios are combined in the above code.
   # Scenario: Navigate to the next page using pagination
   #   Given User is in View Patient Test Reports page with multiple record for the patient
   #   When User clicks the next page arrow (>)
@@ -68,9 +75,3 @@ Feature: Patient information section
   #   Given User is in any page except last page of Report table
   #   When User clicks the last page arrow (<<)
   #   Then Last page of patient records should be displayed
-
-  Scenario: Pagination count is updated correctly
-    Then Pagination text should display the correct range and total number of patients
-
-  Scenario: All pagination arrows disabled in report table
-    Then First, previous, next, last arrows should be disabled
