@@ -28,8 +28,8 @@ export class LoginPage {
     this.errorMessage = page.locator('.error, .alert, .alert-danger, [role="alert"], .invalid-feedback').first();
   }
 
-  async openApp(url = 'https://your-app-url.com/login') {
-    await this.page.goto(url);
+  async openApp() {
+    await this.page.goto('/');
   }
 
   async enterUsername(username) {
@@ -51,7 +51,7 @@ export class LoginPage {
   }
 
   async verifyNavBarText(text) {
-    await this.helper.assertVisible(this.navBarText);
+    await this.helper.assertText(this.navBarText,text);
   }
 
   async verifyHomeIcon() {

@@ -3,17 +3,17 @@ import { test } from '../fixtures/testFixtures.js';
 import { expect } from '@playwright/test';
 const { Given, When, Then } = createBdd(test);
 
-Given('User is on the browser', async ({ page }) => {
-  console.log("User opens browser");
+Given('User is on the browser', async ({logger}) => {
+  logger.info("User opens browser");
   // Browser is already open by Playwright
 });
 
 When('User enters app url', async ({ page }) => {
   console.log("User navigates to app URL");
-  await page.goto('https://your-app-url.com/login');
+  await page.goto('/');
 });
 
-Then('User should see the text {string} on left side of Navigation bar', async ({ page, loginPage }, text) => {
+Then('User should see the text {string} on left side of Navigation bar', async ({ loginPage }, text) => {
   await expect(loginPage.navBarText).toHaveText(text);
   await expect(loginPage.navBarText).toBeVisible();
 });
@@ -57,7 +57,7 @@ Then('Login button should be visible', async ({ loginPage }) => {
   await expect(loginPage.loginButton).toBeEnabled();
 });
 
-Then('Username and Password labels should be left-aligned above their respective input fields', async ({ loginPage, page }) => {
+Then('Username and Password labels should be left-aligned above their respective input fields', async ({ loginPage }) => {
   // Get positions of labels and input fields
   const usernameLabelBox = await loginPage.usernameLabel.boundingBox();
   const usernameInputBox = await loginPage.usernameInput.boundingBox();
@@ -93,7 +93,7 @@ Then('User should see exactly two input fields', async ({ page }) => {
 
 Given('User is on the login page', async ({ page }) => {
   console.log("User is on login page");
-  await page.goto('https://your-app-url.com/login');
+  await page.goto('/');
 });
 
 When('User clicks login button after entering valid credentials', async ({ loginPage }) => {
@@ -131,7 +131,7 @@ Then('Navigation bar should display exactly four links {string}, {string}, {stri
 
 Given('User logged into the app', async ({ page, loginPage }) => {
   console.log("User authentication - logged in");
-  await page.goto('https://your-app-url.com/login');
+  await page.goto('/');
   await loginPage.login('validUsername', 'validPassword');
 });
 

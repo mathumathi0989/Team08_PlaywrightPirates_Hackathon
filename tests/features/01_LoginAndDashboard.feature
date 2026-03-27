@@ -1,3 +1,4 @@
+@login 
 Feature: Login Page UI Verification, Functional Verification, and Dashboard Navigation
 
 Rule: Login Page UI Verification
@@ -62,6 +63,7 @@ Background:
 Scenario: Navigation bar links presence
   Then Navigation bar should display exactly four links "My Patients", "New Patient", "Login", and "Logout"
 
+@dashboard
 Rule: Dashboard Page - Navigation Links Functionality
 Background:
   Given User logged into the app

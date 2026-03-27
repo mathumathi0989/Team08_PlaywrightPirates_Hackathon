@@ -7,7 +7,7 @@ setup("Creating the storageState", async ({page}) => {
     const loginPage = new LoginPage(page);
      //login
     logger.info("Storage state - URL opened and logged in");
-  
+    await loginPage.openApp();
     await loginPage.login(process.env.APP_USERNAME, process.env.APP_PASSWORD);
    
     //save the storageState

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 import process from 'process';
+import fs from "fs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -26,20 +27,22 @@ const browserDevices = {
 
 const selectedDevice = browserDevices[BROWSER] || devices["Desktop Chrome"];
 
+const storagePath = "auth/storageState.json";
+const hasStorage = fs.existsSync(storagePath);
+
 export default defineConfig({
   testDir,
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 1,
   workers: process.env.CI ? 1 : 1,
-  reporter: [["html"], ["allure-playwright"]],
+  reporter: [["html",{ outputFolder: 'playwright-report', open: 'always' }], ["allure-playwright"]],
   use: {
     baseURL: process.env.APP_URL,
     headless: HEADLESS,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
-    video: "retain-on-failure",
-    retries: 2,
+    video: "retain-on-failure"
   },
 
   projects: [
@@ -61,7 +64,7 @@ export default defineConfig({
         ...selectedDevice,
         headless: HEADLESS,
       },
-      testMatch: ["**/.features-gen/**/loginmodule.feature.spec.js"],
+      testMatch: ["**/.features-gen/**/01_LoginAndDashboard.feature.spec.js"],
     },
     // All other tests uses storageState.json
     {
@@ -69,15 +72,15 @@ export default defineConfig({
       use: {
         ...selectedDevice,
         headless: HEADLESS,
-        storageState: "auth/storageState.json",
+        storageState: hasStorage ? storagePath : undefined,
       },
       testMatch: [
-        '**/.features-gen/**/EditPatient.feature.spec.js',
-        '**/.features-gen/**/DeletePatient.feature.spec.js',],
-         
-        // "**/.features-gen/**/*.feature.spec.js",
-      // ],
-      //dependencies: [`setup - ${BROWSER}`],
+        '**/.features-gen/**/02_MyPatients.feature.spec.js',
+        '**/.features-gen/**/03_AddPatientValidation.feature.spec.js',
+        '**/.features-gen/**/04_AddPatientFunctional.feature.spec.js',
+        '**/.features-gen/**/05_ViewTestReport.feature.spec.js',
+        '**/.features-gen/**/06_EditPatient.feature.spec.js',
+        '**/.features-gen/**/07_DeletePatient.feature.spec.js',],
     },
   ],
 });
