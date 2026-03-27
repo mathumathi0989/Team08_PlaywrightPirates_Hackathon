@@ -1,7 +1,8 @@
-import { expect } from "@playwright/test";
+import {expect} from '@playwright/test'
 
 export class ReusableMethods {
-  constructor(page) {
+
+constructor(page){
     this.page = page;
   }
 
@@ -37,5 +38,8 @@ export class ReusableMethods {
   async assertNotVisible(locator){
     expect(this.page.locator(locator).not.toBeVisible());
   }
+
+
+
 
 }

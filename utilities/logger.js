@@ -14,14 +14,6 @@ const logger = winston.createLogger({
 //  defaultMeta: { service: "dietician-playwright-framework" },
   transports: [
     new winston.transports.File({ filename: "logs/combined.log" }),
-     new winston.transports.Console({          // ← add this
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.printf(({ timestamp, level, message }) => {
-          return `[${timestamp}] ${level}: ${message}`;
-        }),
-      ),
-    }),
   ],
 });
 

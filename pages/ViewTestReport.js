@@ -1,96 +1,109 @@
-// pages/ViewPatientTestReportsPage.js
-
-import { ReusableMethods } from '../utilities/ReusableMethods.js';
-
-export class ViewPatientTestReportsPage {
+export class ViewTestReportPage {
   constructor(page) {
     this.page = page;
-    this.helper = new ReusableMethods(page);
+    this.url = "/readpatients";
 
-    // My Patients page
-    this.myPatientsPageTitle = page.getByText(/my patients/i);
-    this.viewPreviousTestReportsButtons = page.getByRole('button', { name: /view previous test reports/i });
-    this.viewPdfButtons = page.getByRole('button', { name: /view pdf/i });
-    this.myPatientsButton = page.getByRole('link', { name: /my patients/i });
-
-    // Dialog / modal
+  
+    this.myPatientsPageTitle = page.getByRole("heading", { name: /my patients/i }).first();
+    this.myPatientsButton = page.getByRole("link", { name: /my patients/i });
+    this.viewPreviousTestReportsButtons = page.getByRole("button", { name: /view previous test reports/i });
+    this.viewPdfButtons = page.getByRole("button", { name: /view pdf/i });
+  
     this.reportDialog = page.locator('[role="dialog"]').filter({ hasText: /view patient test reports/i }).first();
-    this.reportTitle = page.getByText(/view patient test reports/i).first();
+    this.pageHeader = page.getByRole("heading", { name: /view patient test reports/i }).first();
+    this.reportTitle = this.pageHeader;
     this.closeIcon = page.locator('[role="dialog"] button[aria-label="close"], [role="dialog"] .close, [role="dialog"] .btn-close').first();
 
-    // Patient info section
-    this.patientId = page.locator('text=/patient id/i').first();
-    this.patientName = page.locator('text=/name/i').first();
-    this.patientEmail = page.locator('text=/email/i').first();
-    this.patientContactNumber = page.locator('text=/contact number/i').first();
 
-    // Table
-    this.reportsTable = page.locator('table').first();
-    this.tableHeaders = page.locator('table thead th');
+    this.patientId = page.getByText(/patient id/i).first();
+    this.patientName = page.getByText(/name/i).first();
+    this.patientEmail = page.getByText(/email/i).first();
+    this.patientContactNumber = page.getByText(/contact number/i).first();
 
-    // Individual columns
-    this.recordNumberCells = page.locator('table tbody tr td:nth-child(1)');
-    this.fileCells = page.locator('table tbody tr td:nth-child(2)');
-    this.uploadedTimeCells = page.locator('table tbody tr td:nth-child(3)');
-    this.fileNameCells = page.locator('table tbody tr td:nth-child(4)');
-    this.vitalsCells = page.locator('table tbody tr td:nth-child(5)');
-    this.healthConditionCells = page.locator('table tbody tr td:nth-child(6)');
 
-    // Pagination
-    this.firstPageArrow = page.locator('button').filter({ hasText: /^<<$|^»$|^first$/i }).first();
-    this.previousPageArrow = page.locator('button').filter({ hasText: /^<$|^‹$|^previous$/i }).first();
-    this.nextPageArrow = page.locator('button').filter({ hasText: /^>$|^›$|^next$/i }).first();
-    this.lastPageArrow = page.locator('button').filter({ hasText: /^>>$|^«$|^last$/i }).first();
-    this.paginationText = page.locator('text=/showing\\s+\\d+\\s+to\\s+\\d+\\s+of\\s+\\d+/i').first();
+    this.reportsTable = page.locator("table").first();
+    this.tableHeaders = this.reportsTable.locator("thead th");
+    this.tableRows = this.reportsTable.locator("tbody tr");
+  
+    this.recordNumberCells = this.reportsTable.locator("tbody tr td:nth-child(1)");
+    this.fileCells = this.reportsTable.locator("tbody tr td:nth-child(2)");
+    this.uploadedTimeCells = this.reportsTable.locator("tbody tr td:nth-child(3)");
+    this.fileNameCells = this.reportsTable.locator("tbody tr td:nth-child(4)");
+    this.vitalsCells = this.reportsTable.locator("tbody tr td:nth-child(5)");
+    this.healthConditionCells = this.reportsTable.locator("tbody tr td:nth-child(6)");
+
+    this.firstBtn = page.locator('button:has-text("<<"), button[aria-label*="first" i]').first();
+    this.prevBtn = page.locator('button:has-text("<"), button[aria-label*="previous" i]').first();
+    this.nextBtn = page.locator('button:has-text(">"), button[aria-label*="next" i]').first();
+    this.lastBtn = page.locator('button:has-text(">>"), button[aria-label*="last" i]').first();
+    this.paginationText = page.locator(".pagination-info, [data-testid*='pagination' i], .pagination").first();
+  }
+
+  async goto() {
+    await this.page.goto(this.url);
+  }
+
+  async getReportCount() {
+    return await this.tableRows.count();
+  }
+
+  async getPaginationText() {
+    const txt = await this.paginationText.textContent();
+    return (txt || "").trim();
+  }
+
+  headerCellByName(name) {
+    const escaped = String(name).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return this.tableHeaders.filter({ hasText: new RegExp(`\\b${escaped}\\b`, "i") }).first();
   }
 
   async clickViewPreviousTestReportsForRecord(index = 0) {
-    await this.helper.click(this.viewPreviousTestReportsButtons.nth(index));
+    await this.viewPreviousTestReportsButtons.nth(index).click();
   }
 
   async clickViewPdfForRecord(index = 0) {
-    await this.helper.click(this.viewPdfButtons.nth(index));
+    await this.viewPdfButtons.nth(index).click();
   }
 
   async clickMyPatientsButton() {
-    await this.helper.click(this.myPatientsButton);
+    await this.myPatientsButton.click();
   }
 
   async verifyReportDialogOpened() {
-    await this.helper.assertVisible(this.reportDialog);
+    await this.reportDialog.waitFor({ state: "visible" });
   }
 
-  async verifyTitle(title) {
-    await this.helper.assertVisible(this.reportTitle);
+  async verifyTitle(_title) {
+    await this.reportTitle.waitFor({ state: "visible" });
   }
 
   async verifyPatientIdDisplayed() {
-    await this.helper.assertVisible(this.patientId);
+    await this.patientId.waitFor({ state: "visible" });
   }
 
   async verifyPatientNameDisplayed() {
-    await this.helper.assertVisible(this.patientName);
+    await this.patientName.waitFor({ state: "visible" });
   }
 
   async verifyPatientEmailDisplayed() {
-    await this.helper.assertVisible(this.patientEmail);
+    await this.patientEmail.waitFor({ state: "visible" });
   }
 
   async verifyPatientContactNumberDisplayed() {
-    await this.helper.assertVisible(this.patientContactNumber);
+    await this.patientContactNumber.waitFor({ state: "visible" });
   }
 
   async verifyCloseIconDisplayed() {
-    await this.helper.assertVisible(this.closeIcon);
+    await this.closeIcon.waitFor({ state: "visible" });
   }
 
   async verifyReportsTableDisplayed() {
-    await this.helper.assertVisible(this.reportsTable);
+    await this.reportsTable.waitFor({ state: "visible" });
   }
 
   async verifyTableHeaders(expectedHeaders) {
     for (let i = 0; i < expectedHeaders.length; i++) {
-      await this.helper.assertVisible(this.tableHeaders.nth(i));
+      await this.tableHeaders.nth(i).waitFor({ state: "visible" });
     }
   }
 
@@ -99,57 +112,57 @@ export class ViewPatientTestReportsPage {
   }
 
   async verifyPaginationControlsDisplayed() {
-    await this.helper.assertVisible(this.firstPageArrow);
-    await this.helper.assertVisible(this.previousPageArrow);
-    await this.helper.assertVisible(this.nextPageArrow);
-    await this.helper.assertVisible(this.lastPageArrow);
+    await this.firstBtn.waitFor({ state: "visible" });
+    await this.prevBtn.waitFor({ state: "visible" });
+    await this.nextBtn.waitFor({ state: "visible" });
+    await this.lastBtn.waitFor({ state: "visible" });
   }
 
   async verifyRecordNumbersDisplayed() {
-    await this.helper.assertVisible(this.recordNumberCells.first());
+    await this.recordNumberCells.first().waitFor({ state: "visible" });
   }
 
   async verifyViewPdfButtonsDisplayed() {
-    await this.helper.assertVisible(this.viewPdfButtons.first());
+    await this.viewPdfButtons.first().waitFor({ state: "visible" });
   }
 
   async verifyUploadedTimeDisplayed() {
-    await this.helper.assertVisible(this.uploadedTimeCells.first());
+    await this.uploadedTimeCells.first().waitFor({ state: "visible" });
   }
 
   async verifyFileNamesDisplayed() {
-    await this.helper.assertVisible(this.fileNameCells.first());
+    await this.fileNameCells.first().waitFor({ state: "visible" });
   }
 
   async verifyVitalsDisplayed() {
-    await this.helper.assertVisible(this.vitalsCells.first());
+    await this.vitalsCells.first().waitFor({ state: "visible" });
   }
 
   async clickNextPage() {
-    await this.helper.click(this.nextPageArrow);
+    await this.nextBtn.click();
   }
 
   async clickPreviousPage() {
-    await this.helper.click(this.previousPageArrow);
+    await this.prevBtn.click();
   }
 
   async clickFirstPage() {
-    await this.helper.click(this.firstPageArrow);
+    await this.firstBtn.click();
   }
 
   async clickLastPage() {
-    await this.helper.click(this.lastPageArrow);
+    await this.lastBtn.click();
   }
 
   async verifyPaginationTextDisplayed() {
-    await this.helper.assertVisible(this.paginationText);
+    await this.paginationText.waitFor({ state: "visible" });
   }
 
   async verifyPaginationArrowsDisabled() {
-    await this.helper.assertDisabled(this.firstPageArrow);
-    await this.helper.assertDisabled(this.previousPageArrow);
-    await this.helper.assertDisabled(this.nextPageArrow);
-    await this.helper.assertDisabled(this.lastPageArrow);
+    if (!(await this.firstBtn.isDisabled())) throw new Error("First arrow is not disabled");
+    if (!(await this.prevBtn.isDisabled())) throw new Error("Previous arrow is not disabled");
+    if (!(await this.nextBtn.isDisabled())) throw new Error("Next arrow is not disabled");
+    if (!(await this.lastBtn.isDisabled())) throw new Error("Last arrow is not disabled");
   }
 
   async verifyOnlyTwoRecordsPerPage() {

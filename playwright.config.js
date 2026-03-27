@@ -21,7 +21,11 @@ const testDir = defineBddConfig({
 const browserDevices = {
   chromium: devices["Desktop Chrome"],
   firefox: devices["Desktop Firefox"],
+<<<<<<< HEAD
   webkit: devices["Desktop Safari"],
+=======
+   webkit: devices["Desktop Safari"],
+>>>>>>> origin/main
   edge: devices["Desktop Edge"],
 };
 

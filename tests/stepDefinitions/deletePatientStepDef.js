@@ -7,9 +7,8 @@ Given('Navigating to the My Patient page after logged in', async ({deletePatient
  await deletePatientPage.clickMyPatients();
 });
 
-When('User clicks the Delete icon for a particular patient in the patient table', async ({deletePatientPage,editPatientPage,testDataHelper}) => {
-  //Chaining
-  await deletePatientPage.searchPatient(testDataHelper.patientName);
+When('User clicks the Delete icon for a particular patient in the patient table', async ({deletePatientPage,editPatientPage}) => {
+  await deletePatientPage.searchPatient("patientName");
   await editPatientPage.editDeleteAction({delete:true});
 });
 

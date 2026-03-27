@@ -15,13 +15,13 @@ Given('User is in my patient page', async ({logger}) => {
   logger.info("user is on patient page");
 });
 
-When('User clicks edit icon for the particular patient', async ({editPatientPage,logger}) => {
+When('User clicks edit icon for the particular patient', async ({logger,editPatientPage}) => {
   logger.info("user click on edit");
   await editPatientPage.editDeleteAction({edit:true});
 
 });
 
-Then('User should see  Edit Patient page on the dialog box', async ({editPatientPage,logger}) => {
+Then('User should see  Edit Patient page on the dialog box', async ({logger,editPatientPage}) => {
   editPatientPage.verifyEditTitle();
 logger.info("user should see the edit patient page");
 });
@@ -29,6 +29,7 @@ logger.info("user should see the edit patient page");
 
 Then('User should see {string} and enabled', async ({logger,editPatientPage}, buttonName) => {
  logger.info("user should see on submit button in patient page");
+ console.log("user should see other buttons");
   editPatientPage.verifySubmitCloseButton(buttonName);
 });
 
