@@ -15,6 +15,7 @@ const HEADLESS = process.env.HEADLESS !== "false";
 const testDir = defineBddConfig({
   features: "tests/features/**/*.feature",
   steps: ["tests/stepDefinitions/**/*.js", "tests/fixtures/testFixtures.js"],
+  missingSteps: "skip-scenario",
 });
 
 const browserDevices = {
@@ -72,9 +73,6 @@ export default defineConfig({
         storageState: "auth/storageState.json",
       },
       testMatch: [
-        // '**/.features-gen/**/EditPatient.feature.spec.js',
-        // '**/.features-gen/**/DeletePatient.feature.spec.js',],
-
         "**/.features-gen/**/*.feature.spec.js",
       ],
       //dependencies: [`setup - ${BROWSER}`],
