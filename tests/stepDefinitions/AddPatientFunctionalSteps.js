@@ -4,20 +4,16 @@ import { expect } from "@playwright/test";
 import { validData, dropdownValues } from "../../testData/dropdownData.js";
 import { getData } from "../../utilities/excelReader.js";
 
-
 const { Given, When, Then } = createBdd(test);
 
-Given(
-  "User is in Add Patient Details Dialog Box",
-  async ({ addPatientPage, logger }) => {
-    logger.info("Navigating to Add Patient dialog");
-  },
-);
+Given("User is in Add Patient Details Dialog Box", async ({ logger }) => {
+  logger.info("Navigating to Add Patient dialog");
+});
 
 // ----DropDown Values
 When("User clicks on Allergy dropdown", async ({ addPatientPage, logger }) => {
   logger.info("Clicking Allergy dropdown");
-  // await addPatientPage.allergiesDD.click();
+  await addPatientPage.allergiesDD.click();
 });
 
 Then(
@@ -39,7 +35,7 @@ When(
   "User clicks on Food Preference dropdown",
   async ({ addPatientPage, logger }) => {
     logger.info("Clicking Food Preference dropdown");
-    // await addPatientPage.foodPreferenceDD.click();
+    await addPatientPage.foodPreferenceDD.click();
   },
 );
 
@@ -89,7 +85,7 @@ Then(
 
 When(
   "User fills all mandatory fields with valid data",
-  async ({ addPatientPage, page, logger }) => {
+  async ({ addPatientPage, logger }) => {
     logger.info("Filling all mandatory fields with valid data");
     // Input fields
     //await addPatientPage.helper.fill(addPatientPage.fNameInput, validData.firstName);
@@ -152,7 +148,7 @@ Then(
 
 Then(
   "User should be directed to My Patient Page with New Patient Details created",
-  async () => {
+  async ({ myPatientPage }) => {
     await myPatientPage.waitForPageLoad(); // wait for My Patient Page to load
     const isPatientCreated = await myPatientPage.isNewPatientDisplayed(); // check patient details
     expect(isPatientCreated).toBe(true);

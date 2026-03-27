@@ -5,10 +5,9 @@ import { DashboardPage } from "../../pages/DashboardPage.js";
 import { MyPatientPage } from "../../pages/MyPatientPage.js";
 import { AddPatientPage } from "../../pages/AddPatientPage.js";
 import { EditPatientPage } from "../../pages/EditPatientPage.js";
-import { DeletePatientPage } from "../../pages/DeletePatientPage.js";
-// import { ViewPatientTestReportsPage } from '../../pages/ViewPatientTestReportsPage.js';
+import { DeletePatientPage } from "../../pages/DeletePatientPage.js"
 
-// import { ViewTestReportPage } from "../../pages/ViewTestReportPage.js";
+import { ViewTestReportPage } from "../../pages/ViewTestReport.js";
 import { logger } from "../../utilities/logger.js";
 import { TestDataHelper } from "../../utilities/TestDataHelper.js";
 
@@ -40,9 +39,14 @@ export const test = base.extend({
     await use(new DeletePatientPage(page));
   },
 
-  // viewTestReportPage: async ({ page }, use) => {
-  //   await use(new ViewTestReportPage(page));
-  // },
+  viewReportPage: async ({ page }, use) => {
+    await use(new ViewTestReportPage(page));
+ },
+
+ 
+  viewTestReportPage: async ({ page }, use) => {
+    await use(new ViewTestReportPage(page));
+ },
 
   logger: async ({ page }, use) => {
     await use(logger);

@@ -14,7 +14,10 @@ export class DashboardPage {
     this.loginLink = page.getByRole('link', { name: /^login$/i });
     this.logoutLink = page.getByRole('link', { name: /logout/i });
   }
-
+   async clickMyPatients() {
+    await this.helper.click(this.myPatientsLink);
+  }
+  
   async clickNavLink(linkName) {
     if (linkName == 'My Patients') {
       await this.helper.click(this.myPatientsLink);

@@ -1,5 +1,4 @@
 import { logger } from "../utilities/logger.js";
-import { ReusableMethods } from "../utilities/ReusableMethods.js";
 
 export class AddPatientPage {
   constructor(page) {
@@ -65,10 +64,9 @@ export class AddPatientPage {
   }
 
   async clickAddPatientLink() {
-    logger.info("Clicking Add Patient Link from Dashboard111");
-    // await this.helper.click(this.addPatientLink);
-    // await this.addPatientLink.click();
-    //logger.info("Clicked Add PatientLink111");
+    logger.info("Clicking Add Patient Link from Dashboard");
+    await this.addPatientLink.click();
+    logger.info("Clicked Add PatientLink");
   }
 
   async verifyAddPatientModal() {
@@ -76,6 +74,7 @@ export class AddPatientPage {
     await this.modal.waitFor({ state: "visible" });
     logger.info("Add Patient modal is open");
   }
+<<<<<<< HEAD
 
   getDropdown(dropdownName) {
     const mapping = {
@@ -119,4 +118,6 @@ export class AddPatientPage {
   // async getAllDropdowns() {
   //   return this.modal.locator("select, [role='combobox'], [class*='dropdown']");
   // }
+=======
+>>>>>>> origin/main
 }
