@@ -1,3 +1,4 @@
+@login 
 Feature: Login Page UI Verification, Functional Verification, and Dashboard Navigation
 
 Rule: Login Page UI Verification
@@ -42,6 +43,7 @@ Scenario: Total number of input fields
 Background:
   Given User is on the login page
 
+@smoke
 Scenario: Login with valid credentials
   When User clicks login button after entering valid credentials
   Then User should be redirected to dashboard page
@@ -62,6 +64,7 @@ Background:
 Scenario: Navigation bar links presence
   Then Navigation bar should display exactly four links "My Patients", "New Patient", "Login", and "Logout"
 
+@dashboard
 Rule: Dashboard Page - Navigation Links Functionality
 Background:
   Given User logged into the app

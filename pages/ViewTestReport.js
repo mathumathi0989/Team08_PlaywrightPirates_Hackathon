@@ -1,6 +1,10 @@
+import { title } from 'node:process';
+import {ReusableMethods} from '../utilities/ReusableMethods.js';
+
 export class ViewTestReportPage {
   constructor(page) {
     this.page = page;
+    this.helper = new ReusableMethods(page);
     this.url = "/readpatients";
 
   
@@ -73,7 +77,7 @@ export class ViewTestReportPage {
     await this.reportDialog.waitFor({ state: "visible" });
   }
 
-  async verifyTitle(_title) {
+  async verifyTitle() {
     await this.reportTitle.waitFor({ state: "visible" });
   }
 

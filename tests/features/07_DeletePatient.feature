@@ -31,6 +31,7 @@ Scenario: Delete patient - confirm deletion- Navigation check
 When User accepts the alert
 Then User should be navigated back to main page
 
+@smoke
 Scenario: Delete patient after confirm deletion
 When User accepts the alert
 Then "Patient" should be removed from the table and a success message displayed

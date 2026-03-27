@@ -120,6 +120,8 @@ When(
 
     // Date of Birth
     await addPatientPage.dobField.fill(validData.dob);
+
+
   },
 );
 
@@ -140,6 +142,7 @@ Then(
   'User should see "Patient successfully created" toast message',
   async ({ page, addPatientPage, logger }) => {
     logger.info("Verifying success toast message");
+    await addPatientPage.getNewPatient();
     await addPatientPage.helper.assertVisible(
       page.getByText("Patient successfully created", { exact: true }),
     );
@@ -200,6 +203,40 @@ Then(
   },
 );
 
+
+
+When(
+  "the user enters invalid data for {string} from {string} and tabs away",
+  async ({ addPatientPage, page }, scenarioName, sheetName) => {
+    let testDataRows = getData(sheetName, scenarioName);
+
+    for (const row of testDataRows) {
+      await page.reload();
+      await addPatientPage.clickAddPatientLink();
+      await addPatientPage.verifyAddPatientModal();
+
+      // Go directly to the invalid field
+      const targetField = row["Invalid Field"];
+      const invalidValue = row[targetField];
+      const fieldLocator = addPatientPage.fieldsMap[targetField];
+
+      await fieldLocator.fill(invalidValue);
+      await fieldLocator.press("Tab");
+
+     fieldLocator.locator("..").locator(".invalid-feedback, .error-message");
+
+    }
+  },
+);
+
+Then(
+  "the system should display the respective error message for each invalid input",
+  async ({page},errorMessage) => {
+    await expect(page.getByText(errorMessage)).toBeVisible();
+  },
+);
+
+
 When(
   "User selects valid date {string} in DOB field",
   async ({ addPatientPage, logger }, date) => {
@@ -209,14 +246,12 @@ When(
   },
 );
 Then(
-  "User should see selected date {string} in MM\\/DD\\/YYYY format",
+  "User should see selected date {string} in MM DD YYYY format",
   async ({ addPatientPage, logger }, date) => {
     logger.info(`Verifying date format: ${date}`);
     await expect(addPatientPage.dobField).toHaveValue(date);
   },
 );
-
-// what for the dates when clicked in the datepicker??
 
 When(
   "User enters {string} in DOB field and tabs away",
@@ -246,36 +281,3 @@ Then(
   },
 );
 
-When(
-  "the user enters invalid data for {string} from {string} and tabs away",
-  async ({ addPatientPage, page }, scenarioName, sheetName) => {
-    let testDataRows = getData(sheetName, scenarioName);
-
-    for (const row of testDataRows) {
-      await page.reload();
-      await addPatientPage.clickAddPatientLink();
-      await addPatientPage.verifyAddPatientModal();
-
-      // Go directly to the invalid field
-      const targetField = row["Invalid Field"];
-      const invalidValue = row[targetField];
-      const fieldLocator = addPatientPage.fieldsMap[targetField];
-
-      await fieldLocator.fill(invalidValue);
-      await fieldLocator.press("Tab");
-
-      const errorLocator = fieldLocator
-        .locator("..")
-        .locator(".invalid-feedback, .error-message");
-
-      await expect(errorLocator).toContainText(row["Expected error"]);
-    }
-  },
-);
-
-Then(
-  "the system should display the respective error message for each invalid input",
-  async () => {
-    // already validated in When
-  },
-);

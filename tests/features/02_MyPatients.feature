@@ -1,3 +1,4 @@
+@mypatients
 Feature: My Patient
 
   Background:
@@ -87,22 +88,22 @@ Feature: My Patient
 
   Scenario: Navigate to the next page using pagination
     Given User is in My Patients page with multiple pages of a patient record
-    When User clicks the next page arrow (>)
+    When User clicks the next page arrow
     Then Next set of  patient records should be displayed
 
   Scenario: Navigate to the previous page using pagination
     Given User is in later page of My Patients page
-    When User clicks the previous page arrow (<)
+    When User clicks the previous page arrow
     Then Previous set of patient records should be displayed
 
   Scenario: Navigate to the first page using pagination
     Given User is in any page except first page of My Patients page
-    When User clicks the first page arrow (>>)
+    When User clicks the first page arrow
     Then First page of patient records should be displayed
 
   Scenario: Navigate to the last page using pagination
     Given User is in any page except last page of My Patients page
-    When User clicks the last page arrow (<<)
+    When User clicks the last page arrow
     Then Last page of patient records should be displayed
 
   Scenario: Pagination count is updated correctly
@@ -117,17 +118,17 @@ Feature: My Patient
 
   Scenario: Navigate to first page pagination
     When User navigates to the first page of patient record
-    Then Previous arrow (<) should be disabled
-    And First page arrow (<<) should be disabled
-    And Next arrow (>) should be enabled
-    And Last page arrow (>>) should be enabled
+    Then Previous arrow should be disabled for first page
+    And First page arrow should be disabled for first page
+    And Next arrow should be enabled for first page
+    And Last page arrow should be enabled for first page
 
   Scenario: Navigate to last page pagination
     When User navigates to the last page of patient record
-    Then Previous arrow (>) should be disabled
-    And First page arrow (>>) should be disabled
-    And Next arrow (<) should be enabled
-    And Last page arrow (<<) should be enabled
+    Then Previous arrow should be disabled
+    And First page arrow should be disabled
+    And Next arrow should be enabled
+    And Last page arrow should be enabled
 
   Scenario: All pagination arrows disabled when only one page exists
     Given User is in dietician application dashboard page

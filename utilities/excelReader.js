@@ -27,6 +27,6 @@ export function getData(sheetName, scenarioName) {
   if (matchingRows.length === 0) {
     console.warn(`No data found for the scenario`);
   }
-  //return matchingRows[0];
+  
   return matchingRows;
 }

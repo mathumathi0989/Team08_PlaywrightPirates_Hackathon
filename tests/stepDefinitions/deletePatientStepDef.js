@@ -39,11 +39,13 @@ When('User accepts the alert', async ({deletePatientPage,editPatientPage}) => {
 
 });
 
-Then('User should be navigated back to main page', async ({deletePatientPage}) => {
+Then('User should be navigated back to main page', async ({deletePatientPage,logger}) => {
+  logger.info("Patient deleted");
  await expect(deletePatientPage.page).toHaveTitle(/My Patients/);
 });
 
-Then('{string} should be removed from the table and a success message displayed', async ({deletePatientPage},patientName) => {
+Then('{string} should be removed from the table and a success message displayed', async ({deletePatientPage,logger},patientName) => {
+  logger.info("patient removed from the My patients");
   deletePatientPage.verifyPatientRemoved(patientName);
  deletePatientPage.verifyToastMessage();
 });
